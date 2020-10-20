@@ -59,7 +59,7 @@ function Home() {
                     {feed.profile.username}
                   </div>
                 </Link>
-                <div className="d-inline ml-1">{feed.profile.comment}</div>
+                <div className="d-inline ml-1">{feed.comment}</div>
                 <div className="d-inline float-right mr-2"><FiHeart /></div>
               </div>
             </Card.Body>

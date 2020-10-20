@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Col, Row, Image } from 'react-bootstrap';
 import { FiLock, FiUnlock } from "react-icons/fi";
+import { HiBadgeCheck } from "react-icons/hi";
 
 import defaultLogo from '../assets/default_avatar.png';
 
@@ -33,7 +34,9 @@ function Banner(props) {
               </h3>
             </Col>
             <Col lg={12}>
-              <p className="banner-details">{props.profile.name}</p>
+              <p className="banner-details">
+                {props.profile.name} {props.profile.verified && <HiBadgeCheck />}
+              </p>
             </Col>
           </Row>
         </Col>
