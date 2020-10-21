@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import Spinner from '../components/Spinner';
 import UserCard from '../components/UserCard';
-import Error404 from './404';
+import Error404 from '../components/404';
 import Main from './Main';
 import backendURL from '../utils/constants';
 
@@ -27,7 +27,7 @@ function Users() {
       .catch(() => setUsersList({ loading: false, data: null, error: true }))
   }, [url])
 
-  if (usersList.loading) content = <Spinner />;
+  if (usersList.loading) content = <Spinner whole />;
   if (usersList.error) content = <Error404 />;
 
   if (usersList.data) {

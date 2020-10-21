@@ -9,7 +9,7 @@ import Banner from '../components/Banner';
 import Spinner from '../components/Spinner';
 import FollowersList from '../components/FollowersList';
 import FollowingList from '../components/FollowingList';
-import Error404 from './404';
+import Error404 from '../components/404';
 import Posts from '../components/Posts';
 import Main from './Main';
 import backendURL from '../utils/constants';
@@ -68,7 +68,7 @@ function Profile() {
       .catch(() => setPosts({ loading: false, data: null, error: true }))
   }, [postsUrl])
 
-  if (profile.loading) content = <Spinner />;
+  if (profile.loading) content = <Spinner whole />;
   if (profile.error) content = <Error404 />;
 
   if (profile.data && posts.data) {

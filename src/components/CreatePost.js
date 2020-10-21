@@ -1,11 +1,14 @@
 import React, { useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Card, Row, Col, Form, Button, Image, Spinner as Loading, Alert } from 'react-bootstrap';
 import backendURL from '../utils/constants';
 
 function CreatePost() {
+  const history = useHistory();
   const profile = useSelector(state => state.currentUser.profile);
+  const username = useSelector(state => state.currentUser.username);
   const inputFile = useRef(null);
   const [image, setImage] = useState('');
   const [caption, setCaption] = useState('');
@@ -18,7 +21,6 @@ function CreatePost() {
   const onUploadClick = () => inputFile.current.click();
   const onImageChange = (e) => previewFile(e.target.files[0]);
   const onCaptionChange = (e) => setCaption(e.target.value);
-
   const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -33,17 +35,18 @@ function CreatePost() {
     setPostStatus({ loading: true, done: false, error: false })
     axios.post(`${backendURL}/api/posts/create`,
       data, { withCredentials: true })
-      .then(() => {
+      .then((res) => {
         setPostStatus({ loading: false, done: true, error: false })
         setImage('');
         setCaption('');
+        history.push(`/${username}/p/${res.data._id}`);
       })
       .catch(() => {
         setPostStatus({ loading: false, done: false, error: true })
       });
   };
 
-  const cardStyle = { border: '.5px solid #f5f5f5', cursor: 'pointer' }
+  const cardStyle = { border: '.5px solid #183881', cursor: 'pointer' }
   const dFlex = "h-100 align-items-center d-flex justify-content-center";
 
   return (
@@ -53,12 +56,7 @@ function CreatePost() {
           Encountered an error while posting. Please try again.
       </Alert>
       }
-      {postStatus.done &&
-        <Alert variant="success" className="mb-1">
-          New post created! Check your profile!
-      </Alert>
-      }
-      <Card>
+      <Card style={{ border: '1px solid #183881' }}>
         <Card.Body className="p-2">
           <Form onSubmit={createPost}>
             <Row>
@@ -75,17 +73,21 @@ function CreatePost() {
                   className={`${dFlex}`}
                   style={cardStyle}
                 >
-                  {
-                    image ? (
-                      <Image src={image} fluid />
-                    ) : (
-                        <div
-                          className={`text-center w-100 ${dFlex}`}
-                          style={{ backgroundColor: '#f5f5f5' }}
-                        >
-                          <small style={{ color: '#b0b0b0' }}>Upload image</small>
-                        </div>
-                      )
+                  {image ?
+                    <Image src={image} fluid
+                      style={{
+                        maxWidth: 'auto',
+                        height: '158px',
+                        objectFit: 'contain'
+                      }}
+                    />
+                    :
+                    <div
+                      className={`text-center w-100 ${dFlex}`}
+                      style={{ backgroundColor: '#f5f5f5' }}
+                    >
+                      <small style={{ color: '#b0b0b0' }}>Upload image</small>
+                    </div>
                   }
                 </Card>
               </Col>

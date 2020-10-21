@@ -11,7 +11,7 @@ import {
 import Main from './Main';
 import Spinner from '../components/Spinner';
 import Comment from '../components/Comment';
-import Error404 from './404';
+import Error404 from '../components/404';
 import backendURL from '../utils/constants';
 
 function PostDetails() {
@@ -49,7 +49,7 @@ function PostDetails() {
 
   let content = null;
 
-  if (postDetails.loading) content = <Spinner />;
+  if (postDetails.loading) content = <Spinner whole />;
   if (postDetails.error) content = <Error404 />;
 
   if (postDetails.data && postProfile && postComments) {

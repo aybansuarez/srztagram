@@ -4,6 +4,7 @@ import { Container } from 'react-bootstrap';
 import { CgSmileNone } from "react-icons/cg";
 import UserCard from './UserCard';
 import backendURL from '../utils/constants';
+import Spinner from './Spinner';
 
 function FollowingList(props) {
   let content = null;
@@ -28,6 +29,9 @@ function FollowingList(props) {
       .catch(() => setProfile({ loading: false, data: null, error: true }))
   }, [url])
 
+  if (profile.loading) {
+    content = <Spinner />
+  }
   if (profile.data) {
     content =
       <Container className="p-0">

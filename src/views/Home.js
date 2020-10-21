@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { Container, Card, Image, Row, Spinner as Loading } from 'react-bootstrap';
-import defaultLogo from '../assets/default_avatar.png'
-import { FiHeart } from 'react-icons/fi';
+import { Container } from 'react-bootstrap';
+import { CgSmileNone } from "react-icons/cg";
 
 import Main from './Main';
+import Spinner from '../components/Spinner';
+import NewsfeedPost from '../components/NewsfeedPost';
 import CreatePost from '../components/CreatePost';
 import backendURL from '../utils/constants';
 
@@ -14,6 +14,7 @@ function Home() {
   useEffect(() => { document.title = "SRZtagram"; }, [])
   const profileID = useSelector(state => state.currentUser.profile);
   let content = null;
+  let subcontent = null;
 
   const [feed, setFeed] = useState({ loading: true, data: null, error: false });
 
@@ -28,44 +29,27 @@ function Home() {
       .catch(() => setFeed({ loading: false, data: null, error: true }))
   }, [url])
 
+  if (feed.loading) subcontent = <Spinner />;
+
+  if (feed.data) {
+    if (feed.data.length) {
+      subcontent = feed.data.map((feed, key) =>
+        <NewsfeedPost key={key} post={feed} />)
+    } else {
+      subcontent =
+        <Container className="text-center mt-5">
+          <CgSmileNone style={{ fontSize: '30px' }} />
+          <p className="mt-2 mb-0">
+            No posts found. Follow a user or add a post!
+          </p>
+        </Container>
+    }
+  }
+
   content =
     <div>
       <CreatePost />
-      {feed.loading && <Loading />}
-      {feed.data && feed.data.map((feed, key) =>
-        <Container key={key} className="py-3">
-          <Card style={{ border: '1px solid #183881' }}>
-            <Card.Body className="p-1" style={{ borderBottom: '1px solid #183881' }}>
-              <Row className="font-weight-bold mr-1 d-flex align-items-center">
-                <Link to={`/${feed.profile.username}`} className="col-xs-2 ml-4">
-                  <Image
-                    src={feed.profile.avatar ? feed.profile.avatar : defaultLogo}
-                    style={{ border: '1px solid #c0c0c0', width: '40px', height: '40px', objectFit: 'contain' }}
-                    fluid roundedCircle
-                  />
-                </Link>
-                <Link to={`/${feed.profile.username}`} className="col-xs-5 ml-2 pr-0" style={{ color: '#000' }}>
-                  {feed.profile.username}
-                </Link>
-              </Row>
-            </Card.Body>
-            <Link to={`/${feed.profile.username}/p/${feed._id}`}>
-              <Card.Img variant="bottom" src={feed.image} style={{ borderRadius: '0' }} />
-            </Link>
-            <Card.Body className="p-1" style={{ borderTop: '1px solid #183881' }}>
-              <div className="ml-2" style={{ fontSize: '14px' }}>
-                <Link to={`/${feed.profile.username}`}>
-                  <div className="d-inline font-weight-bold mr-1">
-                    {feed.profile.username}
-                  </div>
-                </Link>
-                <div className="d-inline ml-1">{feed.comment}</div>
-                <div className="d-inline float-right mr-2"><FiHeart /></div>
-              </div>
-            </Card.Body>
-          </Card>
-        </Container>
-      )}
+      {subcontent}
     </div>
 
   return (

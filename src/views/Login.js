@@ -42,7 +42,7 @@ function Login() {
       <Col lg={5} md={8} className="mx-auto">
         <Card className="auth-card text-center">
           <Card.Header className="auth-card-header">
-            <Logo width={'20%'} />
+            <Logo width={'30%'} />
           </Card.Header>
           <Card.Body>
             <Form onSubmit={loginSubmit} className="mx-auto px-5">

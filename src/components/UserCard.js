@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Col, Image, Container } from 'react-bootstrap';
+import { HiBadgeCheck } from "react-icons/hi";
 
 import defaultLogo from '../assets/default_avatar.png'
 import FollowButton from './FollowButton'
@@ -33,7 +34,9 @@ function UserCard(props) {
       </Col>
       <Col>
         <Link to={`/${props.user.username}`}>
-          <h5 className="card-title m-0">{props.user.username}</h5>
+          <h5 className="card-title m-0">
+            {props.user.username} {props.user.verified && <HiBadgeCheck />}
+          </h5>
           <p className="card-text m-0">
             <small className="text-muted">{props.user.name}</small>
           </p>

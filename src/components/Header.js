@@ -8,7 +8,7 @@ function Header() {
   return (
     <Navbar style={{ borderBottom: '.5px solid #c0c0c0' }}>
       <Link className="navbar-brand text-center mx-auto" to="/">
-        <Logo width={'20%'} />
+        <Logo width={'30%'} />
       </Link>
     </Navbar>
   )

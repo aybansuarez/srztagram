@@ -4,7 +4,7 @@ import { Container, Col, Row, Form, Button, Alert, Image, Spinner as Loading } f
 import axios from 'axios';
 
 import defaultLogo from '../assets/default_avatar.png';
-import Error404 from './404';
+import Error404 from '../components/404';
 import Spinner from '../components/Spinner';
 import Main from './Main';
 import { setUser } from '../actions';
@@ -29,6 +29,7 @@ function Settings() {
   const [name, setName] = useState('');
   const [birthday, setBirthday] = useState('');
   const [is_private, setIsPrivate] = useState('');
+  const [bio, setBio] = useState('');
   const [message, setMessage] = useState({
     type: '', loading: false, message: ''
   });
@@ -53,6 +54,7 @@ function Settings() {
   const onChangeEmail = (e) => setEmail(e.target.value);
   const onChangeBirthday = (e) => setBirthday(e.target.value);
   const onChangePrivacy = (e) => setIsPrivate(e.target.checked);
+  const onChangeBio = (e) => setBio(e.target.value);
   const onAvatarChange = (e) => previewFile(e.target.files[0]);
 
   const previewFile = (file) => {
@@ -61,13 +63,13 @@ function Settings() {
     reader.onloadend = () => setAvatar(reader.result);
   }
 
-  if (profile.loading) content = <Spinner />;
+  if (profile.loading) content = <Spinner whole />;
   if (profile.error) content = <Error404 />;
 
   if (profile.data) {
     const updateProfile = (e) => {
       e.preventDefault();
-      const data = { avatar, username, name, email, birthday, is_private };
+      const data = { avatar, bio, username, name, email, birthday, is_private };
       setMessage({ type: '', loading: true, message: '' });
       axios.post(`${backendURL}/api/profiles/${profile.data._id}/update`,
         data, { withCredentials: true })
@@ -84,7 +86,7 @@ function Settings() {
           setMessage({ type: 'success', loading: false, message: res.data });
         })
         .catch((err) => {
-          setMessage({ type: 'danger', loading: false, message: err.data });
+          setMessage({ type: 'danger', loading: false, message: err.response.data });
         });
     };
 
@@ -139,6 +141,17 @@ function Settings() {
               </Form.Group>
 
               <Form.Group>
+                <Form.Label htmlFor="bio">Bio</Form.Label>
+                <Form.Control
+                  onChange={onChangeBio}
+                  id="bio"
+                  type="text"
+                  value={bio}
+                  placeholder="Add bio"
+                />
+              </Form.Group>
+
+              <Form.Group>
                 <Form.Label htmlFor="name">Name</Form.Label>
                 <Form.Control
                   onChange={onChangeName}
@@ -147,6 +160,9 @@ function Settings() {
                   value={name}
                   required={true}
                 />
+                <Form.Text className="text-muted">
+                  Help people discover your account by using the name you're known by: either your full name or nickname.
+                </Form.Text>
               </Form.Group>
 
               <Form.Group>

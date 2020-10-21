@@ -3,15 +3,23 @@ import { Link } from 'react-router-dom';
 import { Container, Col, Row, Image } from 'react-bootstrap';
 import { FiLock, FiUnlock } from "react-icons/fi";
 import { HiBadgeCheck } from "react-icons/hi";
-
+import { useSelector } from 'react-redux';
 import defaultLogo from '../assets/default_avatar.png';
+import FollowButton from './FollowButton'
+import UnfollowButton from './UnfollowButton'
 
 function Banner(props) {
-
+  const currentProfile = useSelector(state => state.currentUser).profile;
   let followingCount = 0;
   let followersCount = 0;
   for (let i = 0; i < props.profile.following.length; ++i) followingCount++;
   for (let x = 0; x < props.profile.followers.length; ++x) followersCount++;
+
+  const findFollowers = (arr, profile) => {
+    return arr.find((follower) => {
+      return follower === profile;
+    })
+  }
 
   return (
     <div>
@@ -28,15 +36,22 @@ function Banner(props) {
         <Col xs={7}>
           <Row>
             <Col lg={12}>
-              <h3 className="banner-details">
-                {props.profile.username}&nbsp;
+              <h4 className="banner-details">
+                {props.profile.name}&nbsp;
                 {props.profile.is_private ? <FiLock /> : <FiUnlock />}
-              </h3>
+              </h4>
             </Col>
             <Col lg={12}>
-              <p className="banner-details">
-                {props.profile.name} {props.profile.verified && <HiBadgeCheck />}
+              <p className="banner-details m-0">
+                {props.profile.username} {props.profile.verified && <HiBadgeCheck />}
               </p>
+              {props.profile.bio && <p>{props.profile.bio}</p>}
+              {props.profile._id === currentProfile ? null :
+                findFollowers(props.profile.followers, currentProfile) ?
+                  <UnfollowButton user={props.profile} profile={currentProfile} />
+                  :
+                  <FollowButton user={props.profile} profile={currentProfile} />
+              }
             </Col>
           </Row>
         </Col>

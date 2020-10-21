@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
 
-import logo from '../assets/snaprz.png';
+import logo from '../assets/srztagram.png';
 
 
 function Logo(props) {
