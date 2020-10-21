@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { FiArrowLeft } from 'react-icons/fi';
+import { FiArrowLeft, FiLock } from 'react-icons/fi';
 import { RiQuillPenFill } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
@@ -9,6 +9,9 @@ import {
 } from 'react-bootstrap';
 
 import Main from './Main';
+import LikeButton from '../components/LikeButton';
+import UnlikeButton from '../components/UnlikeButton';
+import Likes from '../components/Likes';
 import Spinner from '../components/Spinner';
 import Comment from '../components/Comment';
 import Error404 from '../components/404';
@@ -28,9 +31,15 @@ function PostDetails() {
   const [createComment, setCreateComment] = useState({
     loading: false, done: false, error: false
   });
+  const [likesCount, setLikesCount] = useState(0);
+  const [show, setShow] = useState(false);
+
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   const onChangeComment = (e) => setComment(e.target.value);
-
+  const onLikeClick = () => setLikesCount(likesCount + 1);
+  const onUnlikeClick = () => setLikesCount(likesCount - 1);
   const url = `${backendURL}/api/posts/get_post_details/${id}/u/${username}`;
 
   useEffect(() => {
@@ -43,6 +52,7 @@ function PostDetails() {
         setPostDetails({ loading: false, data: response.data, error: false });
         setPostProfile(response.data.profile);
         setPostComments(response.data.comments);
+        setLikesCount(response.data.likes.length);
       })
       .catch(() => setPostDetails({ loading: false, data: null, error: true }))
   }, [url])
@@ -53,7 +63,16 @@ function PostDetails() {
   if (postDetails.error) content = <Error404 />;
 
   if (postDetails.data && postProfile && postComments) {
-
+    const findFollowers = (followers, profileId) => {
+      return followers.find((follower) => {
+        return follower === profileId;
+      })
+    }
+    const findLiker = (arr, profile) => {
+      return arr.find((liker) => {
+        return liker._id === profile;
+      })
+    }
     const handlePostComment = (e) => {
       e.preventDefault();
       setCreateComment({ loading: true, done: false, error: false })
@@ -71,71 +90,126 @@ function PostDetails() {
     };
 
     content =
-      <Container fluid className="mb-5 post-details-div text-white">
-        <div className="py-3">
-          <Link to={`/${postProfile.username}`}>
-            <FiArrowLeft /> Go to {postProfile.username}'s profile
-          </Link>
-        </div>
-        <Card className="post-details-card">
-          <Card.Img variant="top" src={postDetails.data.image} />
-          <Card.Body className="post-details-body border-bottom mb-2">
-            <Link to={`/${postProfile.username}`}>
-              <div className="d-inline font-weight-bold mr-1">
-                {postProfile.username}
-              </div>
-            </Link>
-            <span style={{ color: '#c0c0c0' }}>
-              <RiQuillPenFill />
-            </span>
-            <div className="d-inline ml-1">
-              {postDetails.data.caption}
-              <span className="float-right">
-                {postDetails.data.createdAt}
-              </span>
-            </div>
-          </Card.Body>
-          <Card.Body className="post-comments py-0">
-            {postComments.length ? postComments.map((comment, key) =>
-              <Comment key={key} comment={comment} profile={postProfile} />
+      <div>
+        {postProfile.is_private && postProfile._id !== profileID &&
+          (!findFollowers(postProfile.followers, profileID)) ? (
+          <Container
+          className="text-center"
+          style={{
+            height: 'calc(100vh - 60px)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <FiLock style={{ fontSize: '30px' }} />
+            <p className="mt-2 mb-0">This post is private.</p>
+            {isLogged ? (
+              <p>Follow to see the account's post.</p>
             ) :
-              <div className="text-muted">No one posted a comment. Add one!</div>
+              <p>
+                <Link to="/">Login</Link> to see the account's post.
+              </p>
             }
-            {isLogged &&
-              <div className="create">
-                <div className="input-group mt-3 mb-2">
-                  <Form.Control
-                    value={comment}
-                    onChange={onChangeComment}
-                    as="textarea"
-                    rows="1"
-                    placeholder="Add comment..."
-                    className="border"
-                  />
-                  <div className="input-group-append">
-                    <Button
-                      onClick={handlePostComment}
-                      className="create-comment"
-                      disabled={comment && !createComment.loading ? false : true}
-                    >
-                      {createComment.loading ?
-                        <Loading
-                          as="span"
-                          animation="border"
-                          size="sm"
-                          role="status"
-                          aria-hidden="true"
-                        />
-                        : 'Comment'}
-                    </Button>
+          </Container>
+        ) : (
+        <Container fluid className="mb-5 post-details-div text-white">
+          <div className="py-3">
+            <Link to={`/${postProfile.username}`}>
+              <FiArrowLeft /> Go to {postProfile.username}'s profile
+            </Link>
+          </div>
+          <Card className="post-details-card">
+            <Card.Img variant="top" src={postDetails.data.image} />
+            <Card.Body className="post-details-body border-bottom mb-2 pt-2">
+              <div className="my-1 d-flex">
+                <div className="col-6 p-0  align-items-center">
+                  {findLiker(postDetails.data.likes, profileID) ?
+                      <UnlikeButton
+                        like={onLikeClick}
+                        unlike={onUnlikeClick}
+                        post={postDetails.data}
+                        profile={profileID}
+                      />
+                      :
+                      <LikeButton
+                        like={onLikeClick}
+                        unlike={onUnlikeClick}
+                        post={postDetails.data}
+                        profile={profileID}
+                      />
+                  }
+                  <span onClick={handleShow} style={{ cursor: 'pointer', fontSize: '17px', marginLeft: '7px' }}>
+                    {likesCount}
+                  </span>
+                </div>
+                <div className="col text-right">
+                  {postDetails.data.createdAt}
+                </div>
+                <Likes
+                  likes={postDetails.data.likes}
+                  show={show}
+                  hide={handleClose}
+                />
+              </div>
+              <Link to={`/${postProfile.username}`}>
+                <div className="d-inline font-weight-bold mr-1">
+                  {postProfile.username}
+                </div>
+              </Link>
+              <span style={{ color: '#c0c0c0' }}>
+                <RiQuillPenFill />
+              </span>
+              <div className="d-inline ml-1">
+                {postDetails.data.caption}
+              </div>
+            </Card.Body>
+            <Card.Body className="post-comments py-0">
+              {postComments.length ? postComments.map((comment, key) =>
+                <Comment key={key} comment={comment} profile={postProfile} />
+              ) :
+                <div className="text-muted pb-2">
+                  No one posted a comment. {isLogged ? ' Add one!' : 'Login to add one!' }
+                </div>
+              }
+              {isLogged &&
+                <div className="create">
+                  <div className="input-group mt-2 mb-2">
+                    <Form.Control
+                      value={comment}
+                      onChange={onChangeComment}
+                      as="textarea"
+                      rows="1"
+                      placeholder="Add comment..."
+                      className="border"
+                    />
+                    <div className="input-group-append">
+                      <Button
+                        onClick={handlePostComment}
+                        className="create-comment"
+                        disabled={comment && !createComment.loading ? false : true}
+                      >
+                        {createComment.loading ?
+                          <Loading
+                            as="span"
+                            animation="border"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                          />
+                          : 'Comment'}
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            }
-          </Card.Body>
-        </Card>
-      </Container>
+              }
+            </Card.Body>
+          </Card>
+        </Container>
+        )}
+      </div>
   }
+
   return (
     <Main component={content} />
   );

@@ -6,19 +6,28 @@ import { useSelector } from 'react-redux';
 
 import LikeButton from './LikeButton';
 import UnlikeButton from './UnlikeButton';
+import Likes from './Likes';
 
 function NewsfeedPost(props) {
-  const [likesCount, setLikesCount] = useState(props.post.likes.length);
   const currentProfile = useSelector(state => state.currentUser).profile;
+
+  const [likesCount, setLikesCount] = useState(props.post.likes.length);
+  const [show, setShow] = useState(false);
+
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   const findLiker = (arr, profile) => {
     return arr.find((liker) => {
-      return liker === profile;
+      return liker._id === profile;
     })
   }
 
-  const onLikeClick = (e) => setLikesCount(likesCount + 1);
-  const onUnlikeClick = (e) => setLikesCount(likesCount - 1);
+  const onLikeClick = () => setLikesCount(likesCount + 1);
+  const onUnlikeClick = () => setLikesCount(likesCount - 1);
+  const newDate = new Date(
+    props.post.createdAt.slice(0, 10)
+  ).toLocaleDateString();
 
   return (
     <Container className="py-3">
@@ -50,6 +59,7 @@ function NewsfeedPost(props) {
             >
               {props.post.profile.username}
             </Link>
+            <div className="col text-right">{newDate}</div>
           </Row>
         </Card.Body>
         <Link to={`/${props.post.profile.username}/p/${props.post._id}`}>
@@ -80,7 +90,14 @@ function NewsfeedPost(props) {
                   profile={currentProfile}
                 />
               }
-              <span style={{ fontSize: '17px', marginLeft: '7px' }}>{likesCount}</span>
+              <span onClick={handleShow} style={{ cursor: 'pointer', fontSize: '17px', marginLeft: '7px' }}>
+                {likesCount}
+              </span>
+              <Likes
+                likes={props.post.likes}
+                show={show}
+                hide={handleClose}
+              />
             </div>
             <Link to={`/${props.post.profile.username}`}>
               <div className="d-inline font-weight-bold mr-1">

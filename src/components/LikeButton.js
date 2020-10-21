@@ -5,7 +5,6 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import backendURL from '../utils/constants';
 import UnlikeButton from './UnlikeButton';
 
-
 function LikeButton(props) {
   let content = null;
   const [doneLike, setDoneLike] = useState(false);
@@ -15,8 +14,9 @@ function LikeButton(props) {
     axios.patch(
       `${backendURL}/api/posts/${props.profile}/like/${props.post._id}`,
       { withCredentials: true })
-      .then(() => {
+      .then((res) => {
         props.like();
+        props.post.likes.push(res.data.likes[0]);
         setDoneLike(true);
       })
   };

@@ -21,8 +21,9 @@ html, #root {
 #root nav.navbar.navbar-expand {
     border-bottom: 1px solid #183881;
     height: 60px;
-    z-index: 2000;
+    z-index: 1005;
     position: sticky;
+    width: 100%;
     top: 0;
     background-color: #183881;
 }
@@ -224,6 +225,11 @@ html, #root {
 
 #root .post-card:hover {
     box-shadow: 0 0 5px #183881;
+}
+
+body > div.fade.like-modal.modal.show > div > div {
+    border: 1px solid #183881;
+    border-radius: 0;
 }
 
 #root .user-card a {

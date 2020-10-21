@@ -46,7 +46,9 @@ function CreatePost() {
       });
   };
 
-  const cardStyle = { border: '.5px solid #183881', cursor: 'pointer' }
+  const cardStyle = {
+    border: '.5px solid #183881', cursor: 'pointer', borderRadius: '0'
+  }
   const dFlex = "h-100 align-items-center d-flex justify-content-center";
 
   return (
