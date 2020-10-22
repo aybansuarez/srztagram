@@ -6,7 +6,7 @@ import axios from 'axios';
 import { FiLogIn, FiLogOut, FiSettings } from 'react-icons/fi';
 import { CgProfile } from 'react-icons/cg';
 import { MdPeopleOutline } from 'react-icons/md';
-import { RiHome2Line } from 'react-icons/ri';
+import { RiHome2Line, RiMessage3Line } from 'react-icons/ri';
 
 import backendURL from '../utils/constants';
 import { logout, unsetUser } from '../actions';
@@ -31,7 +31,7 @@ function Sidebar() {
   };
 
   return (
-    <div style={{ position: 'sticky', top: '60px' }}>
+    <div style={{ position: 'sticky', top: '60px', height: 'calc(100vh - 60px)' }}>
       {isLogged ? (
         <Tab.Container className="p-0">
           <Nav variant="pills" className="flex-column">
@@ -46,6 +46,11 @@ function Sidebar() {
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
+              <Nav.Link className="py-3" as={NavLink} activeClassName="active-sidebar-nav" to={`/messages`}>
+                <RiMessage3Line /> Messages
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
               <Nav.Link className="py-3" as={NavLink} activeClassName="active-sidebar-nav" to="/users">
                 <MdPeopleOutline /> Users
               </Nav.Link>
@@ -55,7 +60,7 @@ function Sidebar() {
                 <FiSettings /> Settings
               </Nav.Link>
             </Nav.Item>
-            <Nav.Item style={{ position: 'fixed', bottom: 0 }}>
+            <Nav.Item style={{ position: 'absolute', bottom: 0 }}>
               <Nav.Link className="py-3" as={Link} onClick={handleLogout} to="/">
                 <FiLogOut /> Logout
               </Nav.Link>

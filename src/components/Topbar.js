@@ -5,7 +5,7 @@ import { Nav } from 'react-bootstrap';
 import axios from 'axios';
 import { FiLogIn, FiLogOut, FiSettings } from 'react-icons/fi';
 import { CgProfile } from 'react-icons/cg';
-import { RiHome2Line } from 'react-icons/ri';
+import { RiHome2Line, RiMessage3Line } from 'react-icons/ri';
 import { MdPeopleOutline } from 'react-icons/md';
 
 import backendURL from '../utils/constants';
@@ -39,6 +39,9 @@ function Topbar() {
           </Nav.Item>
           <Nav.Item>
             <Nav.Link as={NavLink} activeClassName="active" to={`/${username}`}><CgProfile /></Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link as={NavLink} activeClassName="active" to={'/messages'}><RiMessage3Line /></Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link as={NavLink} activeClassName="active" to="/users"><MdPeopleOutline /></Nav.Link>
