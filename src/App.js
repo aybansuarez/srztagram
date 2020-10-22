@@ -9,6 +9,7 @@ import Home from './views/Home';
 import Profile from './views/Profile';
 import PostDetails from './views/PostDetails';
 import Settings from './views/Settings';
+import Message from './views/Message';
 import Users from './views/Users';
 import Header from './components/Header';
 
@@ -25,8 +26,11 @@ function App() {
           <Route exact path='/signup' component={Signup} />
           <Route exact path='/users' component={Users} />
           <Route exact path='/settings' component={Settings} />
+          <Route exact path='/messages' component={Message} />
+          <Route exact path='/messages/:id' component={Message} />
           <Route path='/:username/p/:id' component={PostDetails} />
           <Route path='/:username/followers' component={Profile} />
+          <Route path='/:username/following' component={Profile} />
           <Route path='/:username' component={Profile} />
         </Switch>
       </Router>
