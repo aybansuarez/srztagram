@@ -27,6 +27,8 @@ function Home() {
         setFeed({ loading: false, data: response.data, error: false });
       })
       .catch(() => setFeed({ loading: false, data: null, error: true }))
+
+    return () => console.log("CLEAN UP");
   }, [url])
 
   if (feed.loading) subcontent = <Spinner />;

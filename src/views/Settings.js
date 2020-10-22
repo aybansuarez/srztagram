@@ -48,6 +48,10 @@ function Settings() {
         setBirthday(response.data.birthday.slice(0, 10));
       })
       .catch(() => setProfile({ loading: false, data: null, error: true }))
+
+    return () => {
+      console.log('Clean')
+    }
   }, [url])
 
   const onChangeUsername = (e) => setUsername(e.target.value);

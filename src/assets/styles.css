@@ -242,6 +242,26 @@ body > div.fade.like-modal.modal.show > div > div {
     color: #fff;
 }
 
+#root a.active-message img {
+    border: 3px solid #2452be;
+    box-shadow: 0 0 10px #183881;
+}
+
+#root .chatbox-input {
+    border-radius: 0;
+    position: absolute;
+    bottom: 0
+}
+
+#root .chat-container {
+    height: calc(100vh - 155px);
+}
+#root .legit-chatbox {
+    height: calc(100vh - 193px);
+    overflow-y: auto;
+}
+
+
 #main-container textarea {
     resize: none;
     border: none;
@@ -262,8 +282,6 @@ body > div.fade.like-modal.modal.show > div > div {
     #root .mainbar {
         border-right: 1px solid #c0c0c0;
         border-left: 1px solid #c0c0c0;
-        /* box-shadow: 0 0 10px 0px #61892f; */
-        /* clip-path: inset(0px -10px 0px -10px); */
     }
 }
 
@@ -278,5 +296,11 @@ body > div.fade.like-modal.modal.show > div > div {
     #root .post-card {
         height: 150px;
         width: 150px;
+    }
+    #root .chat-container {
+        height: calc(100vh - 197px);
+    }
+    #root .legit-chatbox {
+        height: calc(100vh - 235px);
     }
 }
