@@ -48,9 +48,9 @@ function Banner(props) {
               {props.profile.bio && <p>{props.profile.bio}</p>}
               {props.profile._id === currentProfile ? null :
                 findFollowers(props.profile.followers, currentProfile) ?
-                  <UnfollowButton user={props.profile} profile={currentProfile} />
+                  <UnfollowButton reload user={props.profile} profile={currentProfile} />
                   :
-                  <FollowButton user={props.profile} profile={currentProfile} />
+                  <FollowButton reload user={props.profile} profile={currentProfile} />
               }
             </Col>
           </Row>

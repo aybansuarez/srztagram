@@ -43,6 +43,7 @@ function Settings() {
       .then((response) => {
         setProfile({ loading: false, data: response.data, error: false });
         setIsPrivate(response.data.is_private);
+        setBio(response.data.bio);
         setName(response.data.name);
         setBirthday(response.data.birthday.slice(0, 10));
       })

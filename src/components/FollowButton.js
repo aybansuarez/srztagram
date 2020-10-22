@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import UnfollowButton from './UnfollowButton';
 import backendURL from '../utils/constants';
@@ -10,6 +11,7 @@ function FollowButton(props) {
   let content = null;
   const isLogged = useSelector(state => state.isLoggedIn);
   const [doneFollow, setDoneFollow] = useState(false);
+  const history = useHistory();
 
   const handleFollow = (e) => {
     e.preventDefault();
@@ -17,6 +19,7 @@ function FollowButton(props) {
       `${backendURL}/api/follows/${props.profile}/follow/${props.user._id}`,
       { withCredentials: true })
       .then(() => {
+        if (props.reload) history.go(0);
         setDoneFollow(true);
       })
   };
