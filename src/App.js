@@ -14,7 +14,6 @@ import Header from './components/Header';
 
 function App() {
   const isLogged = useSelector(state => state.isLoggedIn);
-
   const landingPage = isLogged ? Home : Login;
 
   return (
