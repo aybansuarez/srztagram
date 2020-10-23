@@ -13,7 +13,7 @@ function Chatbox(props) {
 
   const [messages, setMessages] = useState([])
   const [message, setMessage] = useState('')
-  const [profiles, setProfiles] s = useState(null)
+  const [profiles, setProfiles] = useState(null)
 
   const messagesEndRef = useRef('el')
 
