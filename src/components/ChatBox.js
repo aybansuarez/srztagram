@@ -8,12 +8,12 @@ import defaultLogo from '../assets/default_avatar.png';
 let socket;
 
 function Chatbox(props) {
-  const url = `http://localhost:5000/api/messages/chat/${props.chat}`
+  const url = `${backendURL}/api/messages/chat/${props.chat}`
   const profileID = useSelector(state => state.currentUser.profile);
 
   const [messages, setMessages] = useState([])
   const [message, setMessage] = useState('')
-  const [profiles, setProfiles] = useState(null)
+  const [profiles, setProfiles] s = useState(null)
 
   const messagesEndRef = useRef('el')
 

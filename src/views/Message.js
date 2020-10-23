@@ -6,6 +6,7 @@ import axios from 'axios';
 import Main from './Main';
 import ChatBox from '../components/ChatBox';
 import defaultLogo from '../assets/default_avatar.png';
+import backendURL from '../utils/constants'
 
 function Message() {
   const { id } = useParams();
@@ -24,7 +25,7 @@ function Message() {
 
   const profileID = useSelector(state => state.currentUser.profile);
   const isLogged = useSelector(state => state.isLoggedIn);
-  const url = `http://localhost:5000/api/messages/all/${profileID}`
+  const url = `${backendURL}/api/messages/all/${profileID}`
   useEffect(() => {
     axios.get(url)
       .then((res) => {
