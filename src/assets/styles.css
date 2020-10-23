@@ -257,10 +257,9 @@ body > div.fade.like-modal.modal.show > div > div {
     height: calc(100vh - 155px);
 }
 #root .legit-chatbox {
-    height: calc(100vh - 193px);
+    height: calc(100vh - 250px);
     overflow-y: auto;
 }
-
 
 #main-container textarea {
     resize: none;
@@ -301,6 +300,6 @@ body > div.fade.like-modal.modal.show > div > div {
         height: calc(100vh - 197px);
     }
     #root .legit-chatbox {
-        height: calc(100vh - 235px);
+        height: calc(100vh - 291px);
     }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { Container } from 'react-bootstrap';
@@ -15,7 +15,7 @@ function Home() {
   const profileID = useSelector(state => state.currentUser.profile);
   let content = null;
   let subcontent = null;
-
+  const isRendered = useRef(true);
   const [feed, setFeed] = useState({ loading: true, data: null, error: false });
 
   const url = `${backendURL}/api/posts/newsfeed/${profileID}`;
@@ -24,11 +24,13 @@ function Home() {
     setFeed({ loading: true, data: null, error: false })
     axios.get(url)
       .then((response) => {
-        setFeed({ loading: false, data: response.data, error: false });
+        if (isRendered.current) {
+          setFeed({ loading: false, data: response.data, error: false });
+        }
       })
       .catch(() => setFeed({ loading: false, data: null, error: true }))
 
-    return () => console.log("CLEAN UP");
+    return () => isRendered.current = false;
   }, [url])
 
   if (feed.loading) subcontent = <Spinner />;

@@ -10,7 +10,7 @@ import Profile from './views/Profile';
 import PostDetails from './views/PostDetails';
 import Settings from './views/Settings';
 import Message from './views/Message';
-import Users from './views/Users';
+import UsersList from './views/UsersList';
 import Header from './components/Header';
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
         <Switch>
           <Route exact path={['/', '/login']} component={landingPage} />
           <Route exact path='/signup' component={Signup} />
-          <Route exact path='/users' component={Users} />
+          <Route exact path='/users' component={UsersList} />
           <Route exact path='/settings' component={Settings} />
           <Route exact path='/messages' component={Message} />
           <Route exact path='/messages/:id' component={Message} />
