@@ -11,7 +11,7 @@ function Header() {
   const style = headerStyle();
 
   return (
-    <AppBar position='sticky' className={style.root}>
+    <AppBar position='sticky' className={style.root} elevation={0}>
       <Container maxWidth='md'>
         <Toolbar className={style.toolbar}>
           <img src={logo} alt='logo' className={style.logo} />

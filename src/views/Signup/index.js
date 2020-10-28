@@ -53,7 +53,6 @@ function Signup({ history }) {
           })
       })
       .catch((error) => {
-        console.log(error.response)
         setStatus({
           loading: false, type: 'error', message: error.response.data.msg
         });

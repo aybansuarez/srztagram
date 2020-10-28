@@ -25,7 +25,6 @@ function Users() {
         setUsersList({ loading: false, data: res.data, error: false })
       })
       .catch((err) => {
-        console.log(err)
         setUsersList({ loading: false, data: [], error: true })
       })
   }, [url])

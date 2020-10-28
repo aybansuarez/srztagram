@@ -64,8 +64,6 @@ function PostDialog({ open, setOpen }) {
     if (file && file.type.match('image.*')) {
       reader.readAsDataURL(file);
       reader.onloadend = () => setImage(reader.result);
-    } else {
-      console.log('none')
     }
   }
 
