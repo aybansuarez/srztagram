@@ -1,9 +1,10 @@
 import React from 'react';
-import Sidebar from '../../components/Sidebar';
-import Topbar from '../../components/Topbar';
 
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+
+import Sidebar from '../../components/Sidebar';
+// import Topbar from '../../components/Topbar';
 import { mainStyle } from './styles';
 
 function Main({ component }) {

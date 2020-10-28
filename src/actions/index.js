@@ -33,15 +33,3 @@ export const unsetUser = () => {
     }
   };
 };
-
-export const signUp = () => {
-  return {
-    type: 'SIGNUP',
-  };
-};
-
-export const notSignUp = () => {
-  return {
-    type: 'NOT_SIGNUP',
-  };
-};
