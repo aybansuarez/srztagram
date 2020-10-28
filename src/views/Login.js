@@ -45,7 +45,7 @@ function Login() {
             <Logo width={'20%'} />
           </Card.Header>
           <Card.Body>
-            <Form onSubmit={loginSubmit} className="mx-auto px-5">
+            <Form onSubmit={loginSubmit} className="mx-auto px-md-5">
               {loggingIn.error ? (
                 <Alert variant="danger">
                   {loggingIn.error}
