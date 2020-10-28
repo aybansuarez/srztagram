@@ -10,10 +10,6 @@ import UnfollowButton from './UnfollowButton'
 
 function Banner(props) {
   const currentProfile = useSelector(state => state.currentUser).profile;
-  let followingCount = 0;
-  let followersCount = 0;
-  for (let i = 0; i < props.profile.following.length; ++i) followingCount++;
-  for (let x = 0; x < props.profile.followers.length; ++x) followersCount++;
 
   const findFollowers = (arr, profile) => {
     return arr.find((follower) => {
@@ -68,13 +64,13 @@ function Banner(props) {
         <Col>
           <Link to={`/${props.profile.username}/following`}>
             <div className="font-weight-bold on-hover">Following</div>
-            <div>{followingCount}</div>
+            <div>{props.profile.following.length}</div>
           </Link>
         </Col>
         <Col>
           <Link to={`/${props.profile.username}/followers`}>
             <div className="font-weight-bold on-hover">Followers</div>
-            <div>{followersCount}</div>
+            <div>{props.profile.followers.length}</div>
           </Link>
         </Col>
       </Container>
