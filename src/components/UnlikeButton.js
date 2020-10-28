@@ -3,7 +3,7 @@ import axios from 'axios';
 import { AiFillHeart } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
 
-import backendURL from '../utils/constants';
+import { BACKEND_URL } from '../utils/constants';
 import LikeButton from './LikeButton';
 
 function UnlikeButton(props) {
@@ -15,7 +15,7 @@ function UnlikeButton(props) {
   const handleUnlike = (e) => {
     e.preventDefault();
     axios.patch(
-      `${backendURL}/api/posts/${props.profile}/unlike/${props.post._id}`,
+      `${BACKEND_URL}/api/posts/${props.profile}/unlike/${props.post._id}`,
       { withCredentials: true })
       .then(() => {
         let index = props.post.likes.map(

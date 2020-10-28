@@ -5,14 +5,14 @@ import Spinner from '../components/Spinner';
 import UserCard from '../components/UserCard';
 import Error404 from '../components/404';
 import Main from './Main';
-import backendURL from '../utils/constants';
+import { BACKEND_URL } from '../utils/constants';
 
 function Users() {
   const [searchTerm, setSearchTerm] = useState("");
   const handleChange = event => {
     setSearchTerm(event.target.value);
   };
-  const url = `${backendURL}/api/profiles/search?q=${searchTerm}`;
+  const url = `${BACKEND_URL}/api/profiles/search?q=${searchTerm}`;
   let content = null;
 
   const [usersList, setUsersList] = useState({

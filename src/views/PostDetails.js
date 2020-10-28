@@ -15,7 +15,7 @@ import Likes from '../components/Likes';
 import Spinner from '../components/Spinner';
 import Comment from '../components/Comment';
 import Error404 from '../components/404';
-import backendURL from '../utils/constants';
+import { BACKEND_URL } from '../utils/constants';
 
 function PostDetails() {
   const { id } = useParams();
@@ -40,7 +40,7 @@ function PostDetails() {
   const onChangeComment = (e) => setComment(e.target.value);
   const onLikeClick = () => setLikesCount(likesCount + 1);
   const onUnlikeClick = () => setLikesCount(likesCount - 1);
-  const url = `${backendURL}/api/posts/get_post_details/${id}/u/${username}`;
+  const url = `${BACKEND_URL}/api/posts/get_post_details/${id}/u/${username}`;
 
   useEffect(() => {
     setPostDetails({ loading: true, data: null, error: false })
@@ -77,7 +77,7 @@ function PostDetails() {
       e.preventDefault();
       setCreateComment({ loading: true, done: false, error: false })
       const data = { comment: comment, profile: profileID };
-      axios.post(`${backendURL}/api/comments/post_comment/${id}`,
+      axios.post(`${BACKEND_URL}/api/comments/post_comment/${id}`,
         data, { withCredentials: true })
         .then((res) => {
           setCreateComment({ loading: false, done: true, error: false });

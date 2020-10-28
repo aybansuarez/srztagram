@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Card, Row, Col, Form, Button, Image, Spinner as Loading, Alert } from 'react-bootstrap';
-import backendURL from '../utils/constants';
+import { BACKEND_URL } from '../utils/constants';
 
 function CreatePost() {
   const history = useHistory();
@@ -33,7 +33,7 @@ function CreatePost() {
     e.preventDefault();
     const data = { image, caption, profile };
     setPostStatus({ loading: true, done: false, error: false })
-    axios.post(`${backendURL}/api/posts/create`,
+    axios.post(`${BACKEND_URL}/api/posts/create`,
       data, { withCredentials: true })
       .then((res) => {
         setPostStatus({ loading: false, done: true, error: false })

@@ -2,13 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import io from 'socket.io-client';
-import backendURL from '../utils/constants'
+import { BACKEND_URL } from '../utils/constants'
 import { useSelector } from 'react-redux';
 import defaultLogo from '../assets/default_avatar.png';
 let socket;
 
 function Chatbox(props) {
-  const url = `${backendURL}/api/messages/chat/${props.chat}`
+  const url = `${BACKEND_URL}/api/messages/chat/${props.chat}`
   const profileID = useSelector(state => state.currentUser.profile);
 
   const [messages, setMessages] = useState([])
@@ -24,7 +24,7 @@ function Chatbox(props) {
   }
 
   useEffect(() => {
-    socket = io(backendURL);
+    socket = io(BACKEND_URL);
     axios.get(url)
       .then((res) => {
         setProfiles(res.data.profiles)

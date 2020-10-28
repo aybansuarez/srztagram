@@ -12,7 +12,7 @@ import FollowingList from '../components/FollowingList';
 import Error404 from '../components/404';
 import Posts from '../components/Posts';
 import Main from './Main';
-import backendURL from '../utils/constants';
+import { BACKEND_URL } from '../utils/constants';
 
 function Profile() {
   const currentUser = useSelector(state => state.currentUser);
@@ -39,7 +39,7 @@ function Profile() {
   const [profile, setProfile] = useState(genericState);
   const [posts, setPosts] = useState(genericState);
 
-  const url = `${backendURL}/api/profiles/${username}/`;
+  const url = `${BACKEND_URL}/api/profiles/${username}/`;
   let content = null;
 
   useEffect(() => {
@@ -57,7 +57,7 @@ function Profile() {
     })
   }
 
-  const postsUrl = `${backendURL}/api/posts/u/${username}/`;
+  const postsUrl = `${BACKEND_URL}/api/posts/u/${username}/`;
 
   useEffect(() => {
     setPosts({ loading: true, data: null, error: false })

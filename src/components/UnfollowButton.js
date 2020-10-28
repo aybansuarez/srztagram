@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import FollowButton from './FollowButton';
-import backendURL from '../utils/constants';
+import { BACKEND_URL } from '../utils/constants';
 
 function UnfollowButton(props) {
   let content = null;
@@ -16,7 +16,7 @@ function UnfollowButton(props) {
   const handleUnfollow = (e) => {
     e.preventDefault();
     axios.patch(
-      `${backendURL}/api/follows/${props.profile}/unfollow/${props.user._id}`,
+      `${BACKEND_URL}/api/follows/${props.profile}/unfollow/${props.user._id}`,
       { withCredentials: true })
       .then(() => {
         if (props.reload) history.go(0);

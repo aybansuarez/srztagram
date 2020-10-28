@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import { login, setUser, notSignUp } from '../actions';
 import Logo from '../components/Logo';
-import backendURL from '../utils/constants';
+import { BACKEND_URL } from '../utils/constants';
 
 function Login() {
   useEffect(() => { document.title = "SRZtagram | Login"; }, [])
@@ -24,7 +24,7 @@ function Login() {
     const data = { username, password };
     setLoggingIn({ loading: true, error: false });
     axios.post(
-      `${backendURL}/api/auth/login`, data, { withCredentials: true })
+      `${BACKEND_URL}/api/auth/login`, data, { withCredentials: true })
       .then(res => {
         localStorage.setItem('user', JSON.stringify(res.data));
         dispatch(login());

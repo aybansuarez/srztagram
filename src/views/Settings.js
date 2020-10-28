@@ -8,7 +8,7 @@ import Error404 from '../components/404';
 import Spinner from '../components/Spinner';
 import Main from './Main';
 import { setUser } from '../actions';
-import backendURL from '../utils/constants';
+import { BACKEND_URL } from '../utils/constants';
 
 function Settings() {
   const currentUser = useSelector(state => state.currentUser);
@@ -35,7 +35,7 @@ function Settings() {
   });
 
   let content = null;
-  const url = `${backendURL}/api/profiles/${currentUser.username}/`;
+  const url = `${BACKEND_URL}/api/profiles/${currentUser.username}/`;
 
   useEffect(() => {
     setProfile({ loading: true, data: null, error: false })
@@ -76,7 +76,7 @@ function Settings() {
       e.preventDefault();
       const data = { avatar, bio, username, name, email, birthday, is_private };
       setMessage({ type: '', loading: true, message: '' });
-      axios.post(`${backendURL}/api/profiles/${profile.data._id}/update`,
+      axios.post(`${BACKEND_URL}/api/profiles/${profile.data._id}/update`,
         data, { withCredentials: true })
         .then((res) => {
           const newDetails = {

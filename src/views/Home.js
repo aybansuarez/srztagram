@@ -8,7 +8,7 @@ import Main from './Main';
 import Spinner from '../components/Spinner';
 import NewsfeedPost from '../components/NewsfeedPost';
 import CreatePost from '../components/CreatePost';
-import backendURL from '../utils/constants';
+import { BACKEND_URL } from '../utils/constants';
 
 function Home() {
   useEffect(() => { document.title = "SRZtagram"; }, [])
@@ -18,7 +18,7 @@ function Home() {
   const isRendered = useRef(true);
   const [feed, setFeed] = useState({ loading: true, data: null, error: false });
 
-  const url = `${backendURL}/api/posts/newsfeed/${profileID}`;
+  const url = `${BACKEND_URL}/api/posts/newsfeed/${profileID}`;
 
   useEffect(() => {
     setFeed({ loading: true, data: null, error: false })

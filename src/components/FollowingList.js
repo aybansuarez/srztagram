@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Container } from 'react-bootstrap';
 import { CgSmileNone } from "react-icons/cg";
 import UserCard from './UserCard';
-import backendURL from '../utils/constants';
+import { BACKEND_URL } from '../utils/constants';
 import Spinner from './Spinner';
 
 function FollowingList(props) {
@@ -19,7 +19,7 @@ function FollowingList(props) {
     loading: false, data: null, error: false
   });
 
-  const url = `${backendURL}/api/follows/get_following/${props.profile.username}`;
+  const url = `${BACKEND_URL}/api/follows/get_following/${props.profile.username}`;
   useEffect(() => {
     setProfile({ loading: true, data: null, error: false })
     axios.get(url)

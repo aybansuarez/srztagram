@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import { signUp } from '../actions';
 import Logo from '../components/Logo';
-import backendURL from '../utils/constants';
+import { BACKEND_URL } from '../utils/constants';
 
 function Signup() {
   useEffect(() => { document.title = "SRZtagram | Signup"; }, [])
@@ -29,7 +29,7 @@ function Signup() {
     const data = { username, password, email, name };
     setSigningUp({ loading: true, error: false });
     axios.post(
-      `${backendURL}/api/auth/signup`, data, { withCredentials: true })
+      `${BACKEND_URL}/api/auth/signup`, data, { withCredentials: true })
       .then(() => {
         dispatch(signUp());
         setSigningUp({ loading: false, error: false });

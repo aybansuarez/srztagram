@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { AiOutlineHeart } from 'react-icons/ai';
 
-import backendURL from '../utils/constants';
+import { BACKEND_URL } from '../utils/constants';
 import UnlikeButton from './UnlikeButton';
 
 function LikeButton(props) {
@@ -12,7 +12,7 @@ function LikeButton(props) {
   const handleLike = (e) => {
     e.preventDefault();
     axios.patch(
-      `${backendURL}/api/posts/${props.profile}/like/${props.post._id}`,
+      `${BACKEND_URL}/api/posts/${props.profile}/like/${props.post._id}`,
       { withCredentials: true })
       .then((res) => {
         props.like();
