@@ -10,9 +10,12 @@ import NewsfeedPost from '../components/NewsfeedPost';
 import CreatePost from '../components/CreatePost';
 import { BACKEND_URL } from '../utils/constants';
 
-function Home() {
+function Home({ history }) {
   useEffect(() => { document.title = "SRZtagram"; }, [])
   const profileID = useSelector(state => state.currentUser.profile);
+  const isLoggedIn = useSelector(state => state.isLoggedIn);
+
+  if (!isLoggedIn) history.push('/login');
   let content = null;
   let subcontent = null;
   const isRendered = useRef(true);

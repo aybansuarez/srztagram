@@ -1,114 +1,141 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container, Row, Col, Form, Button, Card, Alert, Spinner as Loading } from 'react-bootstrap';
 import axios from 'axios';
 
-import { signUp } from '../actions';
-import Logo from '../components/Logo';
+import { login } from '../actions';
 import { BACKEND_URL } from '../utils/constants';
 
-function Signup() {
-  useEffect(() => { document.title = "SRZtagram | Signup"; }, [])
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import Card from '@material-ui/core/Card';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import TextField from '@material-ui/core/TextField';
 
-  const history = useHistory();
-  const currentUser = useSelector(state => state.currentUser.id);
-  if (currentUser) history.push('/');
+import { signupStyle } from './styles';
 
+function Signup({ history }) {
+
+  const isLoggedIn = useSelector(state => state.isLoggedIn);
+  if (isLoggedIn) history.push('/');
   const dispatch = useDispatch();
+
+  const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [signingUp, setSigningUp] = useState({ loading: false, error: '' });
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [status, setStatus] = useState({
+    loading: false, type: '', message: ''
+  });
 
-  const [message, setMessage] = useState({ type: '', message: '' });
+  const noValues = (
+    username.length === 0 || password.length === 0 ||
+    email.length === 0 || confirmPassword.length === 0
+  );
 
   const signupSubmit = (e) => {
     e.preventDefault();
-    const data = { username, password, email, name };
-    setSigningUp({ loading: true, error: false });
+    const data = { username, password, email, confirmPassword };
+    setStatus({ loading: false, type: '', message: '' });
     axios.post(
       `${BACKEND_URL}/api/auth/signup`, data, { withCredentials: true })
       .then(() => {
-        dispatch(signUp());
-        setSigningUp({ loading: false, error: false });
-        history.push('/');
+        const data = { username, password }
+        axios.post(`${BACKEND_URL}/api/auth/login`, data, { withCredentials: true })
+          .then((res) => {
+            localStorage.setItem('auth-token', res.data.token);
+            localStorage.setItem('srztagram-username', res.data.username);
+            localStorage.setItem('srztagram-id', res.data.id);
+            setTimeout(() => {
+              dispatch(login());
+              history.push('/');
+            }, 1000)
+          })
       })
       .catch((error) => {
-        setMessage({ type: 'danger', message: `${error.response.data}.` })
-        setSigningUp({ loading: false, error: error.response.data })
+        console.log(error.response)
+        setStatus({
+          loading: false, type: 'error', message: error.response.data.msg
+        });
       });
   };
 
+
+  const style = signupStyle();
+
   return (
-    <Container className="auth-container">
-      <Col lg={5} md={8} className="mx-auto">
-        <Card className="auth-card text-center">
-          <Card.Header className="auth-card-header">
-            <Logo width={'20%'} />
-          </Card.Header>
-          <Card.Body>
-            <Form onSubmit={signupSubmit} className="mx-auto px-5">
-              {message.message ? (
-                <Alert variant={message.type}>
-                  {message.message}
-                </Alert>
-              ) : null}
-              <Form.Control
-                onChange={(e) => setName(e.target.value)}
-                className="auth-inputs my-2"
-                placeholder="Name"
-                type="text" required={true}
-              />
-              <Form.Control
-                onChange={(e) => setUsername(e.target.value)}
-                className="auth-inputs my-2"
-                placeholder="Username"
-                type="text" required={true}
-              />
-              <Form.Control
-                onChange={(e) => setEmail(e.target.value)}
-                className="auth-inputs my-2"
-                placeholder="Email"
-                type="email" required={true}
-              />
-              <Form.Control
-                onChange={(e) => setPassword(e.target.value)}
-                className="auth-inputs my-2"
-                placeholder="Password"
-                autoComplete="true"
-                type="password" required={true}
-              />
-              <Button
-                type="submit"
-                className="auth-button w-100"
-                disabled={signingUp.loading ? true : false}
-              >
-                {signingUp.loading ? (
-                  <div>
-                    <Loading
-                      as="span"
-                      animation="border"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                      className="mr-2"
-                    /> Signing Up
-                  </div>
-                ) : (
-                    'Sign Up'
-                  )}
-              </Button>
-            </Form>
-          </Card.Body>
-          <Row className="pb-3 auth-card-footer">
-            <Col>
-              Already have an account? <Link to="/">Log In</Link>!
-            </Col>
-          </Row>
-        </Card>
-      </Col>
+    <Container maxWidth='xs' className={style.root}>
+      <Card className={style.media} />
+      <form
+        className={style.form}
+        autoComplete='off'
+        onSubmit={signupSubmit}
+      >
+        <TextField
+          variant='outlined'
+          margin='dense'
+          fullWidth
+          size='small'
+          value={username}
+          label='Username'
+          type='text'
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <TextField
+          variant='outlined'
+          margin='dense'
+          fullWidth
+          size='small'
+          value={email}
+          label='Email'
+          type='email'
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <TextField
+          variant='outlined'
+          margin='dense'
+          fullWidth
+          size='small'
+          value={password}
+          label='Password'
+          type='password'
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <TextField
+          variant='outlined'
+          margin='dense'
+          fullWidth
+          size='small'
+          value={confirmPassword}
+          label='Confirm Password'
+          type='password'
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+        <Button
+          type='submit'
+          className={style.button}
+          fullWidth
+          variant='contained'
+          disabled={status.loading || noValues ? true : false}
+        >
+          {status.loading ?
+            <>
+              <CircularProgress
+                size={20}
+                color='inherit'
+                className={style.spinner}
+              /> Signing Up
+              </>
+            :
+            'Sign Up'
+          }
+        </Button>
+        <Grid container className={style.footer}>
+          Already have an account?
+            <Link className={style.link} to='/'>Log In</Link>!
+          </Grid>
+      </form>
     </Container>
   );
 }

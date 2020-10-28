@@ -50,7 +50,6 @@ function Settings() {
       .catch(() => setProfile({ loading: false, data: null, error: true }))
 
     return () => {
-      console.log('Clean')
     }
   }, [url])
 

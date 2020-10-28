@@ -1,14 +1,8 @@
-let user = localStorage.getItem('user') ? localStorage.getItem('user') : '';
-
-if (user) {
-  user = JSON.parse(user);
-}
+let username = localStorage.getItem('srztagram-username');
+let id = localStorage.getItem('srztagram-id');
 
 const initialState = {
-  id: user ? user.id : '',
-  email: user ? user.email : '',
-  username: user ? user.username : '',
-  profile: user ? user.profile : '',
+  username, profile: id
 }
 
 const userReducer = (state = initialState, action) => {
@@ -17,8 +11,6 @@ const userReducer = (state = initialState, action) => {
       return { ...action.user };
     case 'UNSET_USER':
       const blankState = {
-        id: '',
-        email: '',
         username: '',
         profile: '',
       }

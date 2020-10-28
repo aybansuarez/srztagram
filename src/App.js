@@ -1,7 +1,6 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Switch, Route, useLocation } from 'react-router-dom';
 
 import Login from './views/Login';
 import Signup from './views/Signup';
@@ -12,16 +11,29 @@ import Settings from './views/Settings';
 import Message from './views/Message';
 import UsersList from './views/UsersList';
 import Header from './components/Header';
+import { authenticate } from './utils/authentication';
+import { login } from './actions';
 
 function App() {
-  const isLogged = useSelector(state => state.isLoggedIn);
-  const landingPage = isLogged ? Home : Login;
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  useEffect(() => {
+    const auth = async () => {
+      const isAuth = await authenticate();
+      if (isAuth) dispatch(login())
+    }
+    auth();
+  }, [dispatch]);
 
   return (
-    <Container fluid style={{ padding: 0 }}>
-      <Header />
+    <>
+      {location.pathname !== '/login' && location.pathname !== '/signup' &&
+        <Header />
+      }
       <Switch>
-        <Route exact path={['/', '/login']} component={landingPage} />
+        <Route exact path='/' component={Home} />
+        <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
         <Route exact path='/users' component={UsersList} />
         <Route exact path='/settings' component={Settings} />
@@ -32,7 +44,7 @@ function App() {
         <Route path='/:username/following' component={Profile} />
         <Route path='/:username' component={Profile} />
       </Switch>
-    </Container>
+    </>
   );
 }
 
