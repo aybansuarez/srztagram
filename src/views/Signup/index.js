@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-
-import { login } from '../actions';
-import { BACKEND_URL } from '../utils/constants';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -13,6 +10,8 @@ import Card from '@material-ui/core/Card';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
 
+import { login } from '../../actions';
+import { BACKEND_URL } from '../../utils/constants';
 import { signupStyle } from './styles';
 
 function Signup({ history }) {

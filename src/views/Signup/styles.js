@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import logo from '../assets/srztagram.png';
+import logo from '../../assets/srztagram.png';
 
 export const signupStyle = makeStyles((theme) => ({
   root: {
