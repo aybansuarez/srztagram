@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 import Button from '@material-ui/core/Button';
@@ -11,7 +11,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
 
 import Alert from '../../components/Alert';
-import { login, setUser } from '../../actions';
 import { AUTH_API_URL } from '../../utils/constants';
 import { authStyle } from './styles';
 
@@ -19,8 +18,6 @@ function Signup({ history }) {
 
   const isLoggedIn = useSelector(state => state.isLoggedIn);
   if (isLoggedIn) history.push('/');
-  const dispatch = useDispatch();
-
 
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState('');
@@ -41,23 +38,15 @@ function Signup({ history }) {
     const data = { username, password, email, confirmPassword };
     setStatus({ loading: true, type: '', message: '' });
     axios.post(`${AUTH_API_URL}/signup`, data, { withCredentials: true })
-      .then(() => {
-        const data = { username, password }
-        axios.post(`${AUTH_API_URL}/login`, data, { withCredentials: true })
-          .then((res) => {
-            setStatus({
-              loading: false, type: 'success', message: 'Success! Logging you in...'
-            });
-            localStorage.setItem('auth-token', res.data.token);
-            localStorage.setItem('srztagram-username', res.data.username);
-            localStorage.setItem('srztagram-id', res.data.id);
-            setOpen(true);
-            setTimeout(() => {
-              dispatch(setUser({ username, profile: res.data.id }));
-              dispatch(login());
-              history.push('/');
-            }, 1000)
-          })
+      .then((res) => {
+        setStatus({
+          loading: false, type: 'success', message: res.data.msg
+        });
+        setOpen(true);
+        setEmail('');
+        setUsername('');
+        setPassword('');
+        setConfirmPassword('');
       })
       .catch((error) => {
         setOpen(true);

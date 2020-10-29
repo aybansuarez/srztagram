@@ -69,5 +69,30 @@ export const authStyle = makeStyles((theme) => ({
     '&:hover, &:focus': {
       color: '#fff',
     }
+  },
+  iconDiv: {
+    '& svg': {
+      fontSize: '80px'
+    }
+  },
+  success: {
+    color: 'green'
+  },
+  warning: {
+    color: 'yellow'
+  },
+  error: {
+    color: 'red'
+  },
+  verifyLogo: {
+    display: 'block',
+    width: '80%',
+    margin: '10px auto 0'
+  },
+  divider: {
+    borderColor: '#fff'
+  },
+  message: {
+    paddingBottom: theme.spacing(1)
   }
 }));
