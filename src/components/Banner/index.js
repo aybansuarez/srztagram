@@ -50,33 +50,27 @@ function Banner({ profile }) {
         </Grid>
       </Grid>
       <Grid container className={style.stats}>
-        <Grid item xs={4}>
-          <NavLink
-            activeClassName={style.active}
-            exact to={`/${profile.username}`}
-          >
-            <div>Posts</div>
-            <div>{profile.posts.length}</div>
-          </NavLink>
-        </Grid>
-        <Grid item xs={4}>
-          <NavLink
-            activeClassName={style.active}
-            to={`/${profile.username}/followers`}
-          >
-            <div>Followers</div>
-            <div>{profile.followers.length}</div>
-          </NavLink>
-        </Grid>
-        <Grid item xs={4}>
-          <NavLink
-            activeClassName={style.active}
-            to={`/${profile.username}/following`}
-          >
-            <div> Following</div>
-            <div>{profile.following.length}</div>
-          </NavLink>
-        </Grid>
+        <NavLink
+          activeClassName={style.active}
+          exact to={`/${profile.username}`}
+        >
+          <div>Posts</div>
+          <div>{profile.posts.length}</div>
+        </NavLink>
+        <NavLink
+          activeClassName={style.active}
+          to={`/${profile.username}/followers`}
+        >
+          <div>Followers</div>
+          <div>{profile.followers.length}</div>
+        </NavLink>
+        <NavLink
+          activeClassName={style.active}
+          to={`/${profile.username}/following`}
+        >
+          <div> Following</div>
+          <div>{profile.following.length}</div>
+        </NavLink>
       </Grid>
     </Grid>
   );

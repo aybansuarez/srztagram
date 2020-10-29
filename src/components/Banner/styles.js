@@ -39,17 +39,21 @@ export const bannerStyle = makeStyles((theme) => ({
     color: '#888'
   },
   active: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    borderBottom: '2px solid #fff',
+    borderTop: '2px solid #15202b'
   },
   stats: {
+    display: 'flex',
+    justifyContent: 'space-around',
     borderTop: '1px solid #555',
     borderBottom: '1px solid #555',
-    justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    padding: '10px',
     '& a': {
       color: '#fff',
+      padding: theme.spacing(1),
+      flex: 1,
       textDecoration: 'none'
     }
   },

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { Container } from 'react-bootstrap';
-import { CgSmileNone } from "react-icons/cg";
+import { CgSmileNone } from 'react-icons/cg';
 
 import Main from './Main';
 import Spinner from '../components/Spinner';
@@ -11,7 +11,7 @@ import CreatePost from '../components/CreatePost';
 import { BACKEND_URL } from '../utils/constants';
 
 function Home({ history }) {
-  useEffect(() => { document.title = "SRZtagram"; }, [])
+  useEffect(() => { document.title = 'SRZtagram'; }, [])
   const profileID = useSelector(state => state.currentUser.profile);
   const isLoggedIn = useSelector(state => state.isLoggedIn);
 
@@ -44,9 +44,9 @@ function Home({ history }) {
         <NewsfeedPost key={key} post={feed} />)
     } else {
       subcontent =
-        <Container className="text-center mt-5">
+        <Container className='text-center mt-5'>
           <CgSmileNone style={{ fontSize: '30px' }} />
-          <p className="mt-2 mb-0">
+          <p className='mt-2 mb-0'>
             No posts found. Follow a user or add a post!
           </p>
         </Container>

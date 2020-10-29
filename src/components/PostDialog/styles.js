@@ -45,7 +45,7 @@ const postDialogStyle = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
     display: 'none',
     [theme.breakpoints.up('sm')]: {
-      display: 'block',
+      display: 'flex',
     },
   },
   caption: {

@@ -8,7 +8,7 @@ const profileListStyle = makeStyles((theme) => ({
   item: {
     paddingTop: theme.spacing(1.5),
     paddingBottom: theme.spacing(1.5),
-    borderBottom: '1px solid #c0c0c0'
+    borderBottom: '1px solid #555'
   },
 }));
 
