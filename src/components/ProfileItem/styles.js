@@ -1,10 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const profileListStyle = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    padding: theme.spacing(0),
-  },
+const profileItemStyle = makeStyles((theme) => ({
   item: {
     paddingTop: theme.spacing(1.5),
     paddingBottom: theme.spacing(1.5),
@@ -12,4 +8,4 @@ const profileListStyle = makeStyles((theme) => ({
   },
 }));
 
-export default profileListStyle;
+export default profileItemStyle;

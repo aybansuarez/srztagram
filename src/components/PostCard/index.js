@@ -7,6 +7,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Grid from '@material-ui/core/Grid';
 
 import Spinner from '../Spinner';
+import NoItems from '../NoItems';
 import { POSTS_API_URL } from '../../utils/constants';
 import postCardStyle from './styles';
 
@@ -37,7 +38,7 @@ function PostCard({ username }) {
   return (
     (posts.data ?
       <Grid container spacing={1} className={style.root}>
-        {posts.data.map((post, key) =>
+        {posts.data.length ? posts.data.map((post, key) =>
           <Grid item key={key} xs={4} className={style.grid}>
             <Link to={`/${username}/p/${post._id}`}>
               <CardActionArea>
@@ -53,7 +54,10 @@ function PostCard({ username }) {
               </CardActionArea>
             </Link>
           </Grid>
-        )}
+        )
+          :
+          <NoItems title='posts' />
+        }
       </Grid>
       :
       <Spinner />

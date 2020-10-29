@@ -84,7 +84,7 @@ function PostDialog({ open, setOpen }) {
     >
       <Container maxWidth='xs' className={style.root}>
         <Grid className={style.header}>
-          <Typography variant="h6">Add new post</Typography>
+          <Typography variant='h6'>Add new post</Typography>
           <IconButton className={style.close} onClick={handleClose}>
             <CloseRoundedIcon />
           </IconButton>

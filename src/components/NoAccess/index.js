@@ -19,10 +19,11 @@ function Header() {
         <LockRoundedIcon />
       </Avatar>
       <Typography>This account is private.</Typography>
-      {isLoggedIn ? <Typography>Follow to see the account's posts.</Typography>
+      {isLoggedIn ?
+        <Typography>Follow to see the account's posts.</Typography>
         :
         <Typography>
-          <Link to="/">Login</Link> to see the account's posts.
+          <Link to='/'>Login</Link> to see the account's posts.
         </Typography>
       }
     </Container>

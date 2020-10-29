@@ -23,7 +23,7 @@ export const bannerStyle = makeStyles((theme) => ({
     color: '#fff',
     fontWeight: 'bold',
     alignItems: 'center',
-    borderBottom: '1px solid #555'
+    borderBottom: '1px solid #999'
   },
   button: {
     textAlign: 'end',
@@ -46,8 +46,8 @@ export const bannerStyle = makeStyles((theme) => ({
   stats: {
     display: 'flex',
     justifyContent: 'space-around',
-    borderTop: '1px solid #555',
-    borderBottom: '1px solid #555',
+    borderTop: '1px solid #999',
+    borderBottom: '1px solid #999',
     alignItems: 'center',
     textAlign: 'center',
     '& a': {
