@@ -55,6 +55,12 @@ const postDialogStyle = makeStyles((theme) => ({
     '& label': {
       color: '#999'
     },
+    '& label.Mui-focused': {
+      color: '#999',
+    },
+    '& .MuiFilledInput-underline:after': {
+      borderBottomColor: '#fff',
+    },
     '& input:focus': {
       border: 'none'
     },

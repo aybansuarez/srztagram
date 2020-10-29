@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import logo from '../../assets/srztagram.png';
 
-export const signupStyle = makeStyles((theme) => ({
+export const authStyle = makeStyles((theme) => ({
   root: {
     height: '100vh',
     display: 'flex',
@@ -17,10 +17,16 @@ export const signupStyle = makeStyles((theme) => ({
     '& label': {
       color: '#999'
     },
+    '& label.Mui-focused': {
+      color: '#999',
+    },
+    '& .MuiFilledInput-underline:after': {
+      borderBottomColor: '#fff',
+    },
     '& input:focus': {
       border: 'none'
     },
-    borderBottom: '1px solid #fff'
+    borderBottom: '1px solid #999'
   },
   media: {
     background: `url(${logo}) no-repeat center`,

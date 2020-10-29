@@ -29,7 +29,6 @@ function Chatbox(props) {
       .then((res) => {
         setProfiles(res.data.profiles)
         setMessages(res.data.messages);
-        scrollToBottom();
         socket.emit(
           'join',
           { profile: props.profile._id, chat: props.chat },
@@ -47,7 +46,6 @@ function Chatbox(props) {
   useEffect(() => {
     socket.on('message', (message) => {
       setMessages([...messages, message])
-      scrollToBottom();
     })
   }, [messages])
 

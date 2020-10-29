@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import Button from '@material-ui/core/Button';
@@ -22,6 +23,7 @@ import postDialogStyle from './styles';
 
 function PostDialog({ open, setOpen }) {
   const theme = useTheme();
+  const history = useHistory();
   const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
   const username = useSelector(state => state.currentUser).username;
 
@@ -54,6 +56,9 @@ function PostDialog({ open, setOpen }) {
         setImage('');
         setCaption('');
         setOpen(false);
+        setTimeout(() => {
+          history.push(`/${profile.username}/p/${res.data._id}`)
+        }, 1000);
       })
       .catch((err) => {
         setPostStatus({ loading: false, done: false, error: true })

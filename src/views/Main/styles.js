@@ -7,6 +7,15 @@ export const mainStyle = makeStyles((theme) => ({
       padding: theme.spacing(0, 3, 0),
     },
   },
+  topbar: {
+    position: 'sticky',
+    top: '60px',
+    zIndex: '1000',
+    borderBottom: '1px solid #999',
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
+  },
   sidebar: {
     height: 'calc(100vh - 60px)',
     display: 'none',

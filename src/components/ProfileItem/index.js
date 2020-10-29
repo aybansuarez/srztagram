@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -28,11 +29,17 @@ function ProfileItem({ profile }) {
     button = <FollowButton user={profile} profile={profileID} />
 
   return (
-    <ListItem className={style.item}>
+    <ListItem
+      to={`/${profile.username}`}
+      component={Link}
+      className={style.item}
+    >
       <ListItemAvatar>
         <Avatar src={profile.avatar} />
       </ListItemAvatar>
-      <ListItemText>{profile.username}</ListItemText>
+      <ListItemText className={style.username}>
+        {profile.username}
+      </ListItemText>
       <ListItemSecondaryAction>
         {button}
       </ListItemSecondaryAction>

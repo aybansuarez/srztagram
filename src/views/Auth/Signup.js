@@ -13,7 +13,7 @@ import TextField from '@material-ui/core/TextField';
 import Alert from '../../components/Alert';
 import { login, setUser } from '../../actions';
 import { AUTH_API_URL } from '../../utils/constants';
-import { signupStyle } from './styles';
+import { authStyle } from './styles';
 
 function Signup({ history }) {
 
@@ -68,7 +68,7 @@ function Signup({ history }) {
   };
 
 
-  const style = signupStyle();
+  const style = authStyle();
 
   return (
     <Container maxWidth='xs' className={style.root}>

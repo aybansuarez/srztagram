@@ -7,7 +7,6 @@ import { CgSmileNone } from 'react-icons/cg';
 import Main from './Main';
 import Spinner from '../components/Spinner';
 import NewsfeedPost from '../components/NewsfeedPost';
-import CreatePost from '../components/CreatePost';
 import { BACKEND_URL } from '../utils/constants';
 
 function Home({ history }) {
@@ -55,7 +54,6 @@ function Home({ history }) {
 
   content =
     <div>
-      <CreatePost />
       {subcontent}
     </div>
 

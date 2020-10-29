@@ -15,7 +15,7 @@ import PeopleAltRoundedIcon from '@material-ui/icons/PeopleAltRounded';
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import MeetingRoomRoundedIcon from '@material-ui/icons/MeetingRoomRounded';
 import VpnKeyRoundedIcon from '@material-ui/icons/VpnKeyRounded';
-import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
+import AddIcon from '@material-ui/icons/Add';
 
 import PostDialog from '../PostDialog';
 import sidebarStyle from './styles';
@@ -100,7 +100,7 @@ function Sidebar() {
           <Button
             variant='contained'
             onClick={handleClickOpen}
-            startIcon={<AddCircleRoundedIcon />}
+            startIcon={<AddIcon />}
             className={style.create}
           >
             Create

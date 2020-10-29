@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Switch, Route, useLocation } from 'react-router-dom';
 
-import Login from './views/Login';
-import Signup from './views/Signup';
+import Login from './views/Auth/Login';
+import Signup from './views/Auth/Signup';
 import Home from './views/Home';
 import Profile from './views/Profile';
 import PostDetails from './views/PostDetails';
