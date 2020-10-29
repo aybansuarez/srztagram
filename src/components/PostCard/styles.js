@@ -54,7 +54,7 @@ const postCardStyle = makeStyles((theme) => ({
       width: '215px',
       marginTop: '2px'
     },
-    border: '1px solid #002456',
+    border: '1px solid #15202b',
   },
   root: {
     margin: 'auto',

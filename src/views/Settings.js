@@ -78,14 +78,8 @@ function Settings() {
       axios.post(`${BACKEND_URL}/api/profiles/${profile.data._id}/update`,
         data, { withCredentials: true })
         .then((res) => {
-          const newDetails = {
-            id: currentUser.id,
-            username: username,
-            email: email,
-            profile: profile.data._id
-          }
-          localStorage.setItem('user', JSON.stringify(newDetails));
-          dispatch(setUser(newDetails));
+          localStorage.setItem('srztagram-username', username);
+          dispatch(setUser({ username, profile: profile.data._id }));
           window.scrollTo(0, 0);
           setMessage({ type: 'success', loading: false, message: res.data });
         })

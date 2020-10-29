@@ -4,10 +4,11 @@ const postDialogStyle = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
+    backgroundColor: '#15202b',
     padding: '20px',
     borderRadius: '4px',
     [theme.breakpoints.up('sm')]: {
-      border: '3px solid #002456',
+      border: '2px solid #fff',
       minHeight: '200px',
       minWidth: '500px',
     },
@@ -21,13 +22,18 @@ const postDialogStyle = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between'
   },
+  dialog: {
+    '& .MuiPaper-root': {
+      backgroundColor: '#15202b'
+    }
+  },
   close: {
-    border: '1px solid #002456',
-    backgroundColor: '#002456',
+    border: '1px solid #15202b',
+    backgroundColor: '#15202b',
     color: '#fff',
     padding: theme.spacing(.5),
     '&:hover': {
-      backgroundColor: '#002456'
+      backgroundColor: '#15202b'
     }
   },
   captionbox: {
@@ -36,17 +42,28 @@ const postDialogStyle = makeStyles((theme) => ({
     flex: 1
   },
   avatar: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
   },
   caption: {
     width: '90%',
     flex: 1,
-    marginBottom: '10px'
+    marginBottom: '10px',
+    '& label': {
+      color: '#999'
+    },
+    '& input:focus': {
+      border: 'none'
+    },
+    borderBottom: '1px solid #fff'
   },
   imagediv: {
-    minHeight: '200px',
+    minHeight: '150px',
     maxHeight: '300px',
-    border: '1px solid #002456',
+    border: '1px solid #15202b',
     overflowX: 'hidden',
     '&::-webkit-scrollbar': {
       width: 0, height: 0
@@ -66,11 +83,11 @@ const postDialogStyle = makeStyles((theme) => ({
   },
   icon: {
     padding: '10px',
-    border: '1px solid #002456',
-    color: '#fff',
-    backgroundColor: '#002456',
+    border: '1px solid #15202b',
+    color: '#15202b',
+    backgroundColor: '#fff',
     '&:hover': {
-      backgroundColor: '#002456'
+      backgroundColor: '#fff'
     }
   },
   buttonDiv: {
@@ -78,15 +95,20 @@ const postDialogStyle = makeStyles((theme) => ({
   },
   button: {
     width: '50%',
-    backgroundColor: '#002456',
-    color: '#fff',
-    '&:hover': {
-      backgroundColor: '#002456'
+    border: '1px solid #fff',
+    backgroundColor: '#15202b',
+    '& span': {
+      color: '#fff',
+    },
+    '&:hover, &:focus': {
+      backgroundColor: '#15202b',
     },
     '&.Mui-disabled': {
-      backgroundColor: '#183881',
-      opacity: '0.9',
-      color: '#fff'
+      opacity: '0.5',
+      border: '1px solid #999',
+      '& span': {
+        color: '#999'
+      }
     },
   },
   spinner: {

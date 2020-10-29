@@ -13,31 +13,45 @@ export const signupStyle = makeStyles((theme) => ({
     width: '100%',
     marginTop: theme.spacing(1),
   },
+  input: {
+    '& label': {
+      color: '#999'
+    },
+    '& input:focus': {
+      border: 'none'
+    },
+    borderBottom: '1px solid #fff'
+  },
   media: {
-    backgroundColor: '#002456',
     background: `url(${logo}) no-repeat center`,
     backgroundSize: '180px',
     height: '100px',
     textAlign: 'center',
-    width: 'inherit'
+    width: 'inherit',
+    border: '1px solid #fff'
   },
   button: {
     margin: theme.spacing(1, 0, 1),
-    backgroundColor: '#002456',
+    border: '1px solid #fff',
+    backgroundColor: '#15202b',
+    '& span': {
+      color: '#fff',
+    },
     '&:hover, &:focus': {
-      backgroundColor: '#002456',
+      backgroundColor: '#15202b',
     },
     '&.Mui-disabled': {
-      backgroundColor: '#183881',
-      opacity: '0.9',
-      color: '#fff'
+      opacity: '0.5',
+      '& span': {
+        color: '#999'
+      }
     },
-    borderColor: '#002456',
-    color: '#fff',
   },
   footer: {
     justifyContent: 'center',
+    color: '#999',
     marginTop: theme.spacing(1)
+
   },
   spinner: {
     marginRight: theme.spacing(0.5)
@@ -45,6 +59,9 @@ export const signupStyle = makeStyles((theme) => ({
   link: {
     textDecoration: 'none',
     marginLeft: theme.spacing(0.3),
-    color: '#183881'
+    color: '#fff',
+    '&:hover, &:focus': {
+      color: '#fff',
+    }
   }
 }));

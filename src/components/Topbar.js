@@ -8,7 +8,7 @@ import { CgProfile } from 'react-icons/cg';
 import { RiHome2Line, RiMessage3Line } from 'react-icons/ri';
 import { MdPeopleOutline } from 'react-icons/md';
 
-import { BACKEND_URL } from '../utils/constants';
+import { AUTH_API_URL } from '../utils/constants';
 import { logout, unsetUser } from '../actions';
 
 function Topbar() {
@@ -20,7 +20,7 @@ function Topbar() {
   const handleLogout = (e) => {
     e.preventDefault();
     axios.get(
-      `${BACKEND_URL}/api/auth/logout`, { withCredentials: true })
+      `${AUTH_API_URL}/logout`, { withCredentials: true })
       .then(() => {
         localStorage.removeItem('user');
         dispatch(logout());

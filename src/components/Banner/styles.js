@@ -18,11 +18,12 @@ export const bannerStyle = makeStyles((theme) => ({
     },
   },
   username: {
-    backgroundColor: '#002456',
+    backgroundColor: '#15202b',
     padding: theme.spacing(2),
     color: '#fff',
     fontWeight: 'bold',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderBottom: '1px solid #555'
   },
   button: {
     textAlign: 'end',
@@ -41,12 +42,12 @@ export const bannerStyle = makeStyles((theme) => ({
     fontWeight: 'bold'
   },
   stats: {
+    borderTop: '1px solid #555',
+    borderBottom: '1px solid #555',
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    backgroundColor: '#002456',
     padding: '10px',
-    color: '#fff',
     '& a': {
       color: '#fff',
       textDecoration: 'none'

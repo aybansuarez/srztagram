@@ -76,7 +76,12 @@ function PostDialog({ open, setOpen }) {
   const style = postDialogStyle();
 
   return (
-    <Dialog fullScreen={fullScreen} open={open} onClose={handleClose}>
+    <Dialog
+      fullScreen={fullScreen}
+      open={open}
+      onClose={handleClose}
+      className={style.dialog}
+    >
       <Container maxWidth='xs' className={style.root}>
         <Grid className={style.header}>
           <Typography variant="h6">Add new post</Typography>
@@ -95,7 +100,7 @@ function PostDialog({ open, setOpen }) {
           <TextField
             label='Caption'
             margin='dense'
-            variant='outlined'
+            variant='filled'
             multiline
             rowsMax={4}
             value={caption}

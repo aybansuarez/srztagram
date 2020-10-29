@@ -19,7 +19,7 @@ import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
 
 import PostDialog from '../PostDialog';
 import sidebarStyle from './styles';
-import { logout } from '../../actions';
+import { logout, unsetUser } from '../../actions';
 
 function Sidebar() {
   const history = useHistory();
@@ -39,6 +39,7 @@ function Sidebar() {
     localStorage.removeItem('srztagram-username');
     localStorage.removeItem('srztagram-id');
     dispatch(logout());
+    dispatch(unsetUser());
     history.push('/login');
   };
 

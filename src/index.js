@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import './assets/styles.css'
 
 import * as serviceWorker from './serviceWorker';
@@ -18,14 +19,27 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
+const theme = createMuiTheme({
+  palette: {
+    background: {
+      default: "#15202b",
+    },
+    text: {
+      primary: "#ffffff"
+    }
+  }
+});
+
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <CssBaseline />
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </React.StrictMode>
+    <MuiThemeProvider theme={theme}>
+      <React.StrictMode>
+        <BrowserRouter>
+          <CssBaseline />
+          <App />
+        </BrowserRouter>
+      </React.StrictMode>
+    </MuiThemeProvider>
   </Provider>,
   document.getElementById('root')
 );

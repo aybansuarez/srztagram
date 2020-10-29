@@ -9,7 +9,11 @@ const sidebarStyle = makeStyles((theme) => ({
     '& a': {
       textDecoration: 'none',
       color: 'inherit'
-    }
+    },
+    '& .MuiAvatar-colorDefault': {
+      backgroundColor: '#fff',
+      color: '#15202b',
+    },
   },
   spacer: {
     flex: 1,
@@ -17,23 +21,24 @@ const sidebarStyle = makeStyles((theme) => ({
   },
   create: {
     margin: '20px',
-    backgroundColor: '#002456',
+    backgroundColor: '#15202b',
+    border: '1px solid #fff',
     color: '#fff',
     fontWeight: 'bold',
     '&:hover': {
-      backgroundColor: '#002456',
+      backgroundColor: '#15202b',
     }
   },
   active: {
-    backgroundColor: '#002456',
     color: '#fff',
     '& span': {
       color: '#fff',
       fontWeight: 'bold'
     },
     '& .MuiAvatar-colorDefault': {
-      backgroundColor: '#fff',
-      color: '#002456'
+      backgroundColor: '#15202b',
+      color: '#fff',
+      border: '1px solid #fff'
     },
   }
 }

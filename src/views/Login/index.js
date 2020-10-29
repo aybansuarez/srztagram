@@ -10,8 +10,9 @@ import Card from '@material-ui/core/Card';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
 
-import { login } from '../../actions';
-import { BACKEND_URL } from '../../utils/constants';
+import Alert from '../../components/Alert';
+import { login, setUser } from '../../actions';
+import { AUTH_API_URL } from '../../utils/constants';
 import { loginStyle } from './styles';
 
 function Login({ history }) {
@@ -25,25 +26,32 @@ function Login({ history }) {
   });
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [open, setOpen] = useState(false);
 
   const loginSubmit = (e) => {
     e.preventDefault();
     setStatus({ loading: true, type: '', message: '' })
     const data = { username, password };
-    axios.post(
-      `${BACKEND_URL}/api/auth/login`, data, { withCredentials: true })
+    axios.post(`${AUTH_API_URL}/login`, data, { withCredentials: true })
       .then(res => {
-        setStatus({ loading: false, type: 'success', message: 'AASD' })
+        setStatus({
+          loading: false, type: 'success', message: 'Success! Logging you in...'
+        });
         localStorage.setItem('auth-token', res.data.token);
         localStorage.setItem('srztagram-username', res.data.username);
         localStorage.setItem('srztagram-id', res.data.id);
+        setOpen(true);
         setTimeout(() => {
+          dispatch(setUser({ username, profile: res.data.id }));
           dispatch(login());
           history.push('/');
         }, 1000)
       })
       .catch(error => {
-        setStatus({ loading: false, type: 'error', message: 'AASD' })
+        setOpen(true);
+        setStatus({
+          loading: false, type: 'error', message: error.response.data.msg
+        });
       });
   };
   const noValues = (username.length === 0 || password.length === 0);
@@ -51,6 +59,14 @@ function Login({ history }) {
 
   return (
     <Container maxWidth='xs' className={style.root}>
+      {status.type && status.message &&
+        <Alert
+          severity={status.type}
+          message={status.message}
+          open={open}
+          setOpen={setOpen}
+        />
+      }
       <Card className={style.media} />
       <form
         className={style.form}
@@ -58,23 +74,25 @@ function Login({ history }) {
         onSubmit={loginSubmit}
       >
         <TextField
-          variant='outlined'
+          variant='filled'
           margin='dense'
           fullWidth
           size='small'
           value={username}
           label='Username/Email'
           type='text'
+          className={style.input}
           onChange={(e) => setUsername(e.target.value)}
         />
         <TextField
-          variant='outlined'
+          variant='filled'
           margin='dense'
           fullWidth
           size='small'
           value={password}
           type='password'
           label='Password'
+          className={style.input}
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button
