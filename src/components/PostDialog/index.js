@@ -58,7 +58,7 @@ function PostDialog({ open, setOpen }) {
         setOpen(false);
         setTimeout(() => {
           history.push(`/${profile.username}/p/${res.data._id}`)
-        }, 1000);
+        }, 500);
       })
       .catch((err) => {
         setPostStatus({ loading: false, done: false, error: true })
