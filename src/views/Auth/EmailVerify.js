@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-import PriorityHighRoundedIcon from '@material-ui/icons/PriorityHighRounded';
 
 import { authStyle } from './styles';
 import Spinner from '../../components/Spinner';
@@ -42,34 +41,33 @@ function EmailVerify({ history }) {
     }
   }, [token]);
 
-  if (status.type && status.message)
+  if (status.type && status.message) {
     if (status.type === '200')
       icon = <CheckCircleRoundedIcon className={style.success} />
-    else if (status.type === '409')
-      icon = <PriorityHighRoundedIcon className={style.warning} />;
     else
       icon = <CloseRoundedIcon className={style.error} />;
 
-  content =
-    <Grid style={{ textAlign: 'center' }}>
-      <Grid className={style.iconDiv}>
-        {icon}
-        <img src={logo} alt='logo' className={style.verifyLogo} />
+    content =
+      <Grid className={style.verifyRoot}>
+        <Grid className={style.iconDiv}>
+          {icon}
+          <img src={logo} alt='logo' className={style.verifyLogo} />
+        </Grid>
+        <hr className={style.divider} />
+        <Typography variant='h6' className={style.message}>
+          {status.message}
+        </Typography>
+        <Button
+          component={Link}
+          to='/login'
+          variant='outlined'
+          size='large'
+          className={style.button}
+        >
+          Log In
+          </Button>
       </Grid>
-      <hr className={style.divider} />
-      <Typography variant='h6' className={style.message}>
-        {status.message}
-      </Typography>
-      <Button
-        component={Link}
-        to='/login'
-        variant='outlined'
-        size='large'
-        className={style.button}
-      >
-        Log In
-        </Button>
-    </Grid>
+  }
 
   return (
     <Container maxWidth='md' className={style.root}>

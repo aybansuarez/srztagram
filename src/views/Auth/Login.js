@@ -115,9 +115,10 @@ function Login({ history }) {
           }
         </Button>
         <Grid container className={style.footer}>
-          Don't have an account?
-            <Link className={style.link} to='/signup'>Sign Up</Link>!
-          </Grid>
+          <Link className={style.link} to='/signup'>Forgot Password</Link>
+          <span>&bull;</span>
+          <Link className={style.link} to='/signup'>Sign Up</Link>
+        </Grid>
       </form>
     </Container>
   );

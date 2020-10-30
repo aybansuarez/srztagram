@@ -64,7 +64,7 @@ export const authStyle = makeStyles((theme) => ({
   },
   link: {
     textDecoration: 'none',
-    marginLeft: theme.spacing(0.3),
+    margin: theme.spacing(0, 0.3),
     color: '#fff',
     '&:hover, &:focus': {
       color: '#fff',
@@ -78,21 +78,20 @@ export const authStyle = makeStyles((theme) => ({
   success: {
     color: 'green'
   },
-  warning: {
-    color: 'yellow'
-  },
   error: {
     color: 'red'
   },
   verifyLogo: {
     display: 'block',
-    width: '80%',
     margin: '10px auto 0'
+  },
+  verifyRoot: {
+    textAlign: 'center'
   },
   divider: {
     borderColor: '#fff'
   },
   message: {
     paddingBottom: theme.spacing(1)
-  }
+  },
 }));
