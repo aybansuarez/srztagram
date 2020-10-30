@@ -24,7 +24,7 @@ function EmailVerify({ history }) {
   let content = <Spinner />;
   const token = queryString.parse(location.search).token;
 
-  if (!token) history.push('/login')
+  if (!token) history.push('/')
 
   useEffect(() => {
     if (token) {
