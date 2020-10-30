@@ -80,5 +80,6 @@ export const authStyle = makeStyles((theme) => ({
   avatar: {
     width: '120px',
     height: '120px',
+    cursor: 'pointer',
   },
 }));

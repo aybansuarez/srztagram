@@ -70,8 +70,8 @@ function Settings() {
 
   const previewFile = (file) => {
     const reader = new FileReader();
+    reader.onload = () => setAvatar(reader.result);
     reader.readAsDataURL(file);
-    reader.onloadend = () => setAvatar(reader.result);
   }
 
   if (profile.loading) content = <Spinner whole />;
@@ -134,7 +134,6 @@ function Settings() {
                   }
                   onClick={onAvatarClick}
                   alt={profile.username}
-                  style={{ cursor: 'pointer' }}
                   className={style.avatar}
                 />
                 <input
