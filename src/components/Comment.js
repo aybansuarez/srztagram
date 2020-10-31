@@ -8,9 +8,9 @@ function Comment(props) {
   )
 
   return (
-    <div className="mb-2">
+    <div className='mb-2'>
       <Link to={`/${props.comment.profile.username}`}>
-        <div className="d-inline font-weight-bold mr-1">
+        <div className='d-inline font-weight-bold mr-1'>
           {props.comment.profile.username}
         </div>
       </Link>
@@ -19,7 +19,7 @@ function Comment(props) {
           <RiQuillPenFill />
         </span>
       }
-      <div className="d-inline ml-1">{props.comment.comment} </div>
+      <div className='d-inline ml-1'>{props.comment.comment} </div>
     </div>
   )
 }

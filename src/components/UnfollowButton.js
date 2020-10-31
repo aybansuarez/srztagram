@@ -31,8 +31,8 @@ function UnfollowButton(props) {
       content =
         <Button
           onClick={handleUnfollow}
-          size="sm"
-          variant="outline-danger"
+          size='sm'
+          variant='outline-danger'
         >Unfollow
       </Button>;
     }

@@ -30,16 +30,16 @@ function NewsfeedPost(props) {
   ).toLocaleDateString();
 
   return (
-    <Container className="py-3">
+    <Container className='py-3'>
       <Card style={{ border: '1px solid #183881' }}>
         <Card.Body
-          className="p-1"
+          className='p-1'
           style={{ borderBottom: '1px solid #183881' }}
         >
-          <Row className="font-weight-bold mr-1 d-flex align-items-center">
+          <Row className='font-weight-bold mr-1 d-flex align-items-center'>
             <Link
               to={`/${props.post.profile.username}`}
-              className="col-xs-2 ml-4"
+              className='col-xs-2 ml-4'
             >
               <Image fluid roundedCircle
                 src={props.post.profile.avatar ?
@@ -54,27 +54,27 @@ function NewsfeedPost(props) {
             </Link>
             <Link
               to={`/${props.post.profile.username}`}
-              className="col-xs-5 ml-2 pr-0"
+              className='col-xs-5 ml-2 pr-0'
               style={{ color: '#000' }}
             >
               {props.post.profile.username}
             </Link>
-            <div className="col text-right">{newDate}</div>
+            <div className='col text-right'>{newDate}</div>
           </Row>
         </Card.Body>
         <Link to={`/${props.post.profile.username}/p/${props.post._id}`}>
           <Card.Img
-            variant="bottom"
+            variant='bottom'
             src={props.post.image}
             style={{ borderRadius: '0' }}
           />
         </Link>
         <Card.Body
-          className="px-1 py-2"
+          className='px-1 py-2'
           style={{ borderTop: '1px solid #183881' }}
         >
-          <div className="ml-2" style={{ fontSize: '14px' }}>
-            <div className="my-1 d-flex align-items-center">
+          <div className='ml-2' style={{ fontSize: '14px' }}>
+            <div className='my-1 d-flex align-items-center'>
               {findLiker(props.post.likes, currentProfile) ?
                 <UnlikeButton
                   like={onLikeClick}
@@ -100,11 +100,11 @@ function NewsfeedPost(props) {
               />
             </div>
             <Link to={`/${props.post.profile.username}`}>
-              <div className="d-inline font-weight-bold mr-1">
+              <div className='d-inline font-weight-bold mr-1'>
                 {props.post.profile.username}
               </div>
             </Link>
-            <div className="d-inline ml-1">{props.post.caption}</div>
+            <div className='d-inline ml-1'>{props.post.caption}</div>
           </div>
         </Card.Body>
       </Card>

@@ -49,25 +49,25 @@ function CreatePost() {
   const cardStyle = {
     border: '.5px solid #183881', cursor: 'pointer', borderRadius: '0'
   }
-  const dFlex = "h-100 align-items-center d-flex justify-content-center";
+  const dFlex = 'h-100 align-items-center d-flex justify-content-center';
 
   return (
-    <Container fluid className="py-3 border-bottom">
+    <Container fluid className='py-3 border-bottom'>
       {postStatus.error &&
-        <Alert variant="danger" className="mb-1">
+        <Alert variant='danger' className='mb-1'>
           Encountered an error while posting. Please try again.
       </Alert>
       }
       <Card style={{ border: '1px solid #183881' }}>
-        <Card.Body className="p-2">
+        <Card.Body className='p-2'>
           <Form onSubmit={createPost}>
             <Row>
-              <Col xs={4} sm={3} className="pr-0">
+              <Col xs={4} sm={3} className='pr-0'>
                 <input
-                  type="file"
+                  type='file'
                   ref={inputFile}
                   onChange={onImageChange}
-                  className="d-none"
+                  className='d-none'
                   required={true}
                 />
                 <Card
@@ -94,21 +94,21 @@ function CreatePost() {
                 </Card>
               </Col>
               <Col>
-                <Form.Control value={caption} onChange={onCaptionChange} as="textarea" rows="4" placeholder="Add caption..." className="mb-2" />
+                <Form.Control value={caption} onChange={onCaptionChange} as='textarea' rows='4' placeholder='Add caption...' className='mb-2' />
                 <Button
-                  type="submit"
-                  className="w-100 mt-2"
+                  type='submit'
+                  className='w-100 mt-2'
                   style={{ backgroundColor: '#183881', borderColor: '#183881' }}
                   disabled={image && !postStatus.loading ? false : true}
                 >
                   {postStatus.loading ?
                     <Loading
-                      as="span"
-                      animation="border"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                      className="mr-2"
+                      as='span'
+                      animation='border'
+                      size='sm'
+                      role='status'
+                      aria-hidden='true'
+                      className='mr-2'
                     />
                     : 'Create Post'}
                 </Button>

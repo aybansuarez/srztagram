@@ -94,7 +94,7 @@ function PostDetails() {
         {postProfile.is_private && postProfile._id !== profileID &&
           (!findFollowers(postProfile.followers, profileID)) ? (
           <Container
-          className="text-center"
+          className='text-center'
           style={{
             height: 'calc(100vh - 60px)',
             display: 'flex',
@@ -103,27 +103,27 @@ function PostDetails() {
             justifyContent: 'center'
           }}>
             <FiLock style={{ fontSize: '30px' }} />
-            <p className="mt-2 mb-0">This post is private.</p>
+            <p className='mt-2 mb-0'>This post is private.</p>
             {isLogged ? (
               <p>Follow to see the account's post.</p>
             ) :
               <p>
-                <Link to="/">Login</Link> to see the account's post.
+                <Link to='/'>Login</Link> to see the account's post.
               </p>
             }
           </Container>
         ) : (
-        <Container fluid className="mb-5 post-details-div text-white">
-          <div className="py-3">
+        <Container fluid className='mb-5 post-details-div text-white'>
+          <div className='py-3'>
             <Link to={`/${postProfile.username}`}>
               <FiArrowLeft /> Go to {postProfile.username}'s profile
             </Link>
           </div>
-          <Card className="post-details-card">
-            <Card.Img variant="top" src={postDetails.data.image} />
-            <Card.Body className="post-details-body border-bottom mb-2 pt-2">
-              <div className="my-1 d-flex">
-                <div className="col-6 p-0  align-items-center">
+          <Card className='post-details-card'>
+            <Card.Img variant='top' src={postDetails.data.image} />
+            <Card.Body className='post-details-body border-bottom mb-2 pt-2'>
+              <div className='my-1 d-flex'>
+                <div className='col-6 p-0  align-items-center'>
                   {findLiker(postDetails.data.likes, profileID) ?
                       <UnlikeButton
                         like={onLikeClick}
@@ -143,7 +143,7 @@ function PostDetails() {
                     {likesCount}
                   </span>
                 </div>
-                <div className="col text-right">
+                <div className='col text-right'>
                   {postDetails.data.createdAt}
                 </div>
                 <Likes
@@ -153,49 +153,49 @@ function PostDetails() {
                 />
               </div>
               <Link to={`/${postProfile.username}`}>
-                <div className="d-inline font-weight-bold mr-1">
+                <div className='d-inline font-weight-bold mr-1'>
                   {postProfile.username}
                 </div>
               </Link>
               <span style={{ color: '#c0c0c0' }}>
                 <RiQuillPenFill />
               </span>
-              <div className="d-inline ml-1">
+              <div className='d-inline ml-1'>
                 {postDetails.data.caption}
               </div>
             </Card.Body>
-            <Card.Body className="post-comments py-0">
+            <Card.Body className='post-comments py-0'>
               {postComments.length ? postComments.map((comment, key) =>
                 <Comment key={key} comment={comment} profile={postProfile} />
               ) :
-                <div className="text-muted pb-2">
+                <div className='text-muted pb-2'>
                   No one posted a comment. {isLogged ? ' Add one!' : 'Login to add one!' }
                 </div>
               }
               {isLogged &&
-                <div className="create">
-                  <div className="input-group mt-2 mb-2">
+                <div className='create'>
+                  <div className='input-group mt-2 mb-2'>
                     <Form.Control
                       value={comment}
                       onChange={onChangeComment}
-                      as="textarea"
-                      rows="1"
-                      placeholder="Add comment..."
-                      className="border"
+                      as='textarea'
+                      rows='1'
+                      placeholder='Add comment...'
+                      className='border'
                     />
-                    <div className="input-group-append">
+                    <div className='input-group-append'>
                       <Button
                         onClick={handlePostComment}
-                        className="create-comment"
+                        className='create-comment'
                         disabled={comment && !createComment.loading ? false : true}
                       >
                         {createComment.loading ?
                           <Loading
-                            as="span"
-                            animation="border"
-                            size="sm"
-                            role="status"
-                            aria-hidden="true"
+                            as='span'
+                            animation='border'
+                            size='sm'
+                            role='status'
+                            aria-hidden='true'
                           />
                           : 'Comment'}
                       </Button>

@@ -31,8 +31,8 @@ function FollowButton(props) {
       content =
         <Button
           onClick={handleFollow}
-          size="sm"
-          variant="outline-primary"
+          size='sm'
+          variant='outline-primary'
         >Follow
       </Button>;
     }

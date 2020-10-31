@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import './assets/styles.css'
 
 import * as serviceWorker from './serviceWorker';
@@ -22,10 +22,10 @@ const store = createStore(
 const theme = createMuiTheme({
   palette: {
     background: {
-      default: "#15202b",
+      default: '#15202b',
     },
     text: {
-      primary: "#ffffff"
+      primary: '#ffffff'
     }
   }
 });

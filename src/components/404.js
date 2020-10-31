@@ -11,7 +11,7 @@ function Error404() {
 
   return (
     <Container style={style404}>
-      <Loading className="mr-3" animation="grow" /> ERROR <Loading className="ml-3" animation="grow" />
+      <Loading className='mr-3' animation='grow' /> ERROR <Loading className='ml-3' animation='grow' />
     </Container>
   );
 }
