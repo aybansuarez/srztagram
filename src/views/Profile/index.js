@@ -8,13 +8,12 @@ import Grid from '@material-ui/core/Grid';
 import Main from '../Main';
 import Banner from '../../components/Banner';
 import Spinner from '../../components/Spinner';
-import PostCard from '../../components/PostCard';
 import NoAccess from '../../components/NoAccess';
-import Followers from '../../components/ProfileList/Followers';
-import Following from '../../components/ProfileList/Following';
+import Followers from './Followers';
+import Following from './Following';
+import Posts from './Posts';
 import { PROFILE_API_URL } from '../../utils/constants';
 import { findProfile } from '../../utils/helper';
-import { profileStyle } from './styles';
 
 function Profile() {
   const profileID = useSelector(state => state.currentUser).profile;
@@ -50,25 +49,25 @@ function Profile() {
     return () => isRendered.current = false;
   }, [username])
 
-  const style = profileStyle();
-
   if (profile.loading) content = <Spinner />;
 
   if (profile.data)
     content =
-      <Grid container className={style.root}>
+      <Grid container>
         <Banner profile={profile.data} />
-        {profile.data.is_private && profile.data._id !== profileID &&
-          !findProfile(profile.data.followers, profileID) ?
-          <NoAccess /> :
-          (isPosts ?
-            <PostCard username={username} />
-            : isFollowers ?
-              <Followers profile={profile.data} />
-              : isFollowing ?
-                <Following profile={profile.data} />
-                : null
-          )
+        {
+          profile.data.is_private &&
+            profile.data._id !== profileID &&
+            !findProfile(profile.data.followers, profileID)
+            ? <NoAccess />
+            : (isPosts
+              ? <Posts username={username} />
+              : isFollowers
+                ? <Followers profile={profile.data} />
+                : isFollowing
+                  ? <Following profile={profile.data} />
+                  : null
+            )
         }
       </Grid>
       ;
