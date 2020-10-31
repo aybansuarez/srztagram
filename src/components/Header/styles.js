@@ -22,10 +22,10 @@ const headerStyle = makeStyles((theme) => ({
     minHeight: '60px',
     padding: theme.spacing(0, 2.1),
     [theme.breakpoints.up('sm')]: {
-      borderRight: '1px solid #999',
-      borderLeft: '1px solid #999',
+      borderRight: '1px solid #666',
+      borderLeft: '1px solid #666',
     },
-    borderBottom: '1px solid #999',
+    borderBottom: '1px solid #666',
   },
   button: {
     color: '#fff',

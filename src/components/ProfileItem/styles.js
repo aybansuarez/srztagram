@@ -4,7 +4,7 @@ const profileItemStyle = makeStyles((theme) => ({
   item: {
     paddingTop: theme.spacing(1.5),
     paddingBottom: theme.spacing(1.5),
-    borderBottom: '1px solid #999',
+    borderBottom: '1px solid #666',
     color: '#fff',
     '&:hover': {
       color: '#fff',

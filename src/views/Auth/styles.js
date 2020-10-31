@@ -15,10 +15,10 @@ export const authStyle = makeStyles((theme) => ({
   },
   input: {
     '& label': {
-      color: '#999'
+      color: '#666'
     },
     '& label.Mui-focused': {
-      color: '#999',
+      color: '#666',
     },
     '& .MuiFilledInput-underline:after': {
       borderBottomColor: '#fff',
@@ -26,7 +26,7 @@ export const authStyle = makeStyles((theme) => ({
     '& input:focus': {
       border: 'none'
     },
-    borderBottom: '1px solid #999'
+    borderBottom: '1px solid #666'
   },
   media: {
     background: `url(${logo}) no-repeat center`,
@@ -49,13 +49,13 @@ export const authStyle = makeStyles((theme) => ({
     '&.Mui-disabled': {
       opacity: '0.5',
       '& span': {
-        color: '#999'
+        color: '#666'
       }
     },
   },
   footer: {
     justifyContent: 'center',
-    color: '#999',
+    color: '#666',
     marginTop: theme.spacing(1)
 
   },

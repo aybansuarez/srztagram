@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams, useLocation } from 'react-router-dom';
 
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -17,20 +17,28 @@ import topbarStyle from './styles';
 
 function Topbar() {
   const style = topbarStyle();
+  const { id } = useParams();
+  const location = useLocation();
   const username = useSelector(state => state.currentUser).username;
   const isLoggedIn = useSelector(state => state.isLoggedIn);
   const [open, setOpen] = useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+
+  const handleClickOpen = () => setOpen(true);
+
+  const excludeFAB = ['/messages', `/messages/${id}`, '/settings'];
+
   return (
     <>
       {isLoggedIn ?
         <>
-          <Fab onClick={handleClickOpen} className={style.floatBtn}>
-            <AddIcon />
-          </Fab>
-          <PostDialog open={open} setOpen={setOpen} />
+          {!excludeFAB.includes(location.pathname) &&
+            <>
+              <Fab onClick={handleClickOpen} className={style.floatBtn}>
+                <AddIcon />
+              </Fab>
+              <PostDialog open={open} setOpen={setOpen} />
+            </>
+          }
           <BottomNavigation className={style.root}>
             <BottomNavigationAction
               exact to='/'

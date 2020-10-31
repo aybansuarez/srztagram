@@ -19,7 +19,7 @@ export const authStyle = makeStyles((theme) => ({
   header: {
     padding: theme.spacing(2.5, 0),
     marginBottom: theme.spacing(2),
-    borderBottom: '1px solid #999'
+    borderBottom: '1px solid #666'
   },
   fileInput: {
     display: 'none'
@@ -31,10 +31,10 @@ export const authStyle = makeStyles((theme) => ({
   },
   input: {
     '& label': {
-      color: '#999'
+      color: '#666'
     },
     '& label.Mui-focused': {
-      color: '#999',
+      color: '#666',
     },
     '& .MuiFilledInput-underline:after': {
       borderBottomColor: '#fff',
@@ -42,7 +42,7 @@ export const authStyle = makeStyles((theme) => ({
     '& input:focus': {
       border: 'none'
     },
-    borderBottom: '1px solid #999',
+    borderBottom: '1px solid #666',
     marginBottom: theme.spacing(2)
   },
   button: {
@@ -58,7 +58,7 @@ export const authStyle = makeStyles((theme) => ({
     '&.Mui-disabled': {
       opacity: '0.5',
       '& span': {
-        color: '#999'
+        color: '#666'
       }
     },
   },

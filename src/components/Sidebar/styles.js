@@ -26,7 +26,7 @@ const sidebarStyle = makeStyles((theme) => ({
     color: '#fff',
     fontWeight: 'bold',
     '&:hover': {
-      backgroundColor: '#15202b',
+      backgroundColor: '#223344',
     }
   },
   active: {

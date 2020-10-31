@@ -11,7 +11,6 @@ export const mainStyle = makeStyles((theme) => ({
     position: 'sticky',
     top: '60px',
     zIndex: '1000',
-    borderBottom: '1px solid #999',
     [theme.breakpoints.up('sm')]: {
       display: 'none',
     },
@@ -19,7 +18,7 @@ export const mainStyle = makeStyles((theme) => ({
   sidebar: {
     height: 'calc(100vh - 60px)',
     display: 'none',
-    borderLeft: '1px solid #999',
+    borderLeft: '1px solid #666',
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
       flex: 1,
@@ -29,8 +28,8 @@ export const mainStyle = makeStyles((theme) => ({
   },
   main: {
     [theme.breakpoints.up('sm')]: {
-      borderRight: '1px solid #999',
-      borderLeft: '1px solid #999',
+      borderRight: '1px solid #666',
+      borderLeft: '1px solid #666',
     },
   }
 }));

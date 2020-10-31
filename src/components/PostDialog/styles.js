@@ -53,10 +53,10 @@ const postDialogStyle = makeStyles((theme) => ({
     flex: 1,
     marginBottom: '10px',
     '& label': {
-      color: '#999'
+      color: '#666'
     },
     '& label.Mui-focused': {
-      color: '#999',
+      color: '#666',
     },
     '& .MuiFilledInput-underline:after': {
       borderBottomColor: '#fff',
@@ -111,9 +111,9 @@ const postDialogStyle = makeStyles((theme) => ({
     },
     '&.Mui-disabled': {
       opacity: '0.5',
-      border: '1px solid #999',
+      border: '1px solid #666',
       '& span': {
-        color: '#999'
+        color: '#666'
       }
     },
   },

@@ -6,7 +6,8 @@ const topbarStyle = makeStyles((theme) => ({
     padding: 0,
     height: '30px',
     display: 'flex',
-    backgroundColor: '#15202b'
+    backgroundColor: '#15202b',
+    borderBottom: '1px solid #666',
   },
   active: {
     backgroundColor: '#fff',
