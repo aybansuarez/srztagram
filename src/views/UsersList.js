@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 
 import Spinner from '../components/Spinner';
@@ -8,25 +8,31 @@ import Main from './Main';
 import { BACKEND_URL } from '../utils/constants';
 
 function Users() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const handleChange = event => {
     setSearchTerm(event.target.value);
   };
   const url = `${BACKEND_URL}/api/profiles/search?q=${searchTerm}`;
   let content = null;
-
+  const isRendered = useRef(false);
   const [usersList, setUsersList] = useState({
     loading: false, data: [], error: false
   });
 
   useEffect(() => {
+    isRendered.current = true;
     axios.get(url)
       .then((res) => {
-        setUsersList({ loading: false, data: res.data, error: false })
+        if (isRendered.current) {
+          setUsersList({ loading: false, data: res.data, error: false })
+
+        }
       })
       .catch((err) => {
         setUsersList({ loading: false, data: [], error: true })
       })
+
+    return () => isRendered.current = false;
   }, [url])
 
   if (usersList.loading) content = <Spinner whole />;
@@ -35,8 +41,8 @@ function Users() {
   content =
     <div>
       <input
-        type="text"
-        placeholder="Search"
+        type='text'
+        placeholder='Search'
         value={searchTerm}
         onChange={handleChange}
       />

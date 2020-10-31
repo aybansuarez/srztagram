@@ -23,15 +23,15 @@ function Home({ history }) {
 
   useEffect(() => {
     isRendered.current = true;
-    if (isRendered.current) {
-      setFeed({ loading: true, data: null, error: false })
-      axios.get(url)
-        .then((response) => {
+    setFeed({ loading: true, data: null, error: false })
+    axios.get(url)
+      .then((response) => {
+        if (isRendered.current) {
           setFeed({ loading: false, data: response.data, error: false });
-        })
-        .catch(() => setFeed({ loading: false, data: null, error: true }))
+        }
+      })
+      .catch(() => setFeed({ loading: false, data: null, error: true }))
 
-    }
     return () => isRendered.current = false;
   }, [url])
 
