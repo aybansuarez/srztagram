@@ -25,7 +25,7 @@ function Topbar() {
 
   const handleClickOpen = () => setOpen(true);
 
-  const excludeFAB = ['/messages', `/messages/${id}`, '/settings'];
+  const excludeFAB = ['/messages', `/messages/${id}`, '/settings', '/users'];
 
   return (
     <>
