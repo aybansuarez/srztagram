@@ -34,6 +34,12 @@ const topbarStyle = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'flex-end',
     justifyContent: 'center',
+    [theme.breakpoints.up('sm')]: {
+      margin: theme.spacing(0, 1)
+    },
+    [theme.breakpoints.up('md')]: {
+      margin: theme.spacing(0)
+    },
   },
   chatMessageOne: {
     display: 'flex',
@@ -49,7 +55,13 @@ const topbarStyle = makeStyles((theme) => ({
   chatMessageTwo: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(1)
+    },
+    [theme.breakpoints.up('md')]: {
+      marginLeft: theme.spacing(0)
+    },
   },
   message: {
     padding: theme.spacing(1),
