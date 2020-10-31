@@ -56,9 +56,6 @@ const postCardStyle = makeStyles((theme) => ({
     },
     border: '1px solid #15202b',
   },
-  root: {
-    margin: 'auto',
-  },
   image: {
     objectFit: 'auto',
     height: '100%',
