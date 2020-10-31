@@ -12,7 +12,7 @@ import Profile from './views/Profile';
 import PostDetails from './views/PostDetails';
 import Settings from './views/Settings';
 import Message from './views/Message';
-import UsersList from './views/UsersList';
+import UserSearch from './views/UserSearch';
 import Header from './components/Header';
 import { authenticate } from './utils/authentication';
 import { login } from './actions';
@@ -30,7 +30,10 @@ function App() {
   }, [dispatch]);
 
   const excludeHeader = [
-    '/login', '/signup', '/email-verify', '/password-reset', 
+    '/login',
+    '/signup',
+    '/email-verify',
+    '/password-reset',
     '/password-reset/new'
   ];
 
@@ -43,7 +46,7 @@ function App() {
         <Route exact path='/' component={Home} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
-        <Route exact path='/users' component={UsersList} />
+        <Route exact path='/users' component={UserSearch} />
         <Route exact path='/settings' component={Settings} />
         <Route exact path='/messages' component={Message} />
         <Route exact path='/messages/:id' component={Message} />
