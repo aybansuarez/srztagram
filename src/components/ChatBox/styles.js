@@ -14,6 +14,8 @@ const topbarStyle = makeStyles((theme) => ({
     maxHeight: 'calc(100vh - 255px)',
     padding: theme.spacing(.5, 0),
     overflowY: 'auto',
+    display: 'flex',
+    flexDirection: 'column-reverse',
     [theme.breakpoints.up('sm')]: {
       maxHeight: 'calc(100vh - 245px)',
     },
@@ -89,7 +91,7 @@ const topbarStyle = makeStyles((theme) => ({
   },
   button: {
     borderRadius: '0',
-    color: '#183881',
+    color: '#15202b',
     border: 'none',
     '&:focus': {
       outline: 'none'

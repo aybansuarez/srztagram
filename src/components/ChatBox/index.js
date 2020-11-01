@@ -55,7 +55,7 @@ function Chatbox({ chat, profile }) {
   useEffect(() => {
     isRendered.current = true;
     socket.on('message', (message) => {
-      if (isRendered.current) setMessages([...messages, message]);
+      if (isRendered.current) setMessages([message, ...messages]);
     });
 
     return () => isRendered.current = false;
@@ -95,17 +95,24 @@ function Chatbox({ chat, profile }) {
             </Grid>
           )}
           <Grid className={style.chatbox}>
+            <Grid ref={(el) => messagesEndRef.current = el}></Grid>
             {messages.length && messages.map((message, key) =>
               <Grid key={key}>
                 {message.profile._id === profile._id ?
                   <Grid container className={style.chatOne}>
                     <Grid item xs={7} sm={6} className={style.chatMessageOne}>
-                      <span className={`${style.message} ${style.messageOne}`}>{message.message}</span>
+                      <span className={`${style.message} ${style.messageOne}`}>
+                        {message.message}
+                      </span>
                     </Grid>
                     <Grid item xs={2} sm={1} className={style.chatAvatar}>
                       <Avatar
                         alt={message.profile.username}
-                        src={message.profile.avatar ? message.profile.avatar : defaultLogo}
+                        src={
+                          message.profile.avatar
+                            ? message.profile.avatar
+                            : defaultLogo
+                        }
                       />
                     </Grid>
                   </Grid>
@@ -114,17 +121,22 @@ function Chatbox({ chat, profile }) {
                     <Grid item xs={2} sm={1} className={style.chatAvatar}>
                       <Avatar
                         alt={message.profile.username}
-                        src={message.profile.avatar ? message.profile.avatar : defaultLogo}
+                        src={
+                          message.profile.avatar
+                            ? message.profile.avatar
+                            : defaultLogo
+                        }
                       />
                     </Grid>
                     <Grid item xs={7} sm={6} className={style.chatMessageTwo}>
-                      <span className={`${style.message} ${style.messageTwo}`}>{message.message}</span>
+                      <span className={`${style.message} ${style.messageTwo}`}>
+                        {message.message}
+                      </span>
                     </Grid>
                   </Grid>
                 }
               </Grid>
             )}
-            <Grid ref={(el) => messagesEndRef.current = el}></Grid>
           </Grid>
           <Grid>
             <Paper component='form' className={style.chatForm}>
