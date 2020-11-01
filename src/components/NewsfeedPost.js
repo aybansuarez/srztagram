@@ -30,7 +30,7 @@ function NewsfeedPost(props) {
   ).toLocaleDateString();
 
   return (
-    <Container className='py-3'>
+    <Container className='p-0' style={{ maxWidth: '684px' }}>
       <Card style={{ border: '1px solid #183881' }}>
         <Card.Body
           className='p-1'

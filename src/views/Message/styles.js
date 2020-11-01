@@ -110,7 +110,6 @@ export const messageStyle = makeStyles((theme) => ({
   message: {
     padding: theme.spacing(1),
     color: '#fff',
-    borderRadius: '10px',
     wordBreak: 'break-word',
     minHeight: '40px',
     display: 'flex',
@@ -118,8 +117,10 @@ export const messageStyle = makeStyles((theme) => ({
   },
   messageOne: {
     backgroundColor: '#223344',
+    borderRadius: '10px 10px 0 10px',
   },
   messageTwo: {
+    borderRadius: '10px 10px 10px 0',
     backgroundColor: '#666',
   },
   chatForm: {
