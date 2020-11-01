@@ -3,10 +3,10 @@ import { NavLink, matchPath, useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import axios from 'axios';
+import ChatBox from './ChatBox';
 import Main from '../Main';
-import ChatBox from '../../components/ChatBox';
 import defaultLogo from '../../assets/default_avatar.png';
-import { BACKEND_URL } from '../../utils/constants'
+import { MESSAGES_API_URL } from '../../utils/constants'
 
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
@@ -17,7 +17,7 @@ function Message() {
   const [chats, setChats] = useState(null);
   const [chatID, setChatID] = useState(id);
   const [currentProfile, setCurrentProfile] = useState(null);
-  const profileID = useSelector(state => state.currentUser.profile);
+  const profileID = useSelector(state => state.currentUser).profile;
   const isLoggedIn = useSelector(state => state.isLoggedIn);
   const location = useLocation();
   const isRendered = useRef(false);
@@ -31,7 +31,7 @@ function Message() {
     path: '/messages/:id', exact: true, strict: true
   })
 
-  const url = `${BACKEND_URL}/api/messages/all/${profileID}`
+  const url = `${MESSAGES_API_URL}/all/${profileID}`
 
   useEffect(() => {
     isRendered.current = true;
@@ -54,7 +54,7 @@ function Message() {
 
   let content = null;
 
-  if (chats && isLoggedIn) {
+  if (chats && isLoggedIn)
     content =
       <>
         <Grid container className={style.root}>
@@ -84,8 +84,6 @@ function Message() {
             <ChatBox chat={chatID} profile={currentProfile[0]} />
             : null}
       </>
-
-  }
 
   return (
     <Main component={content} />

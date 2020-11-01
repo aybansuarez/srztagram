@@ -12,24 +12,23 @@ import Paper from '@material-ui/core/Paper';
 
 import { BACKEND_URL, MESSAGES_API_URL } from '../../utils/constants'
 import defaultLogo from '../../assets/default_avatar.png';
-import chatboxStyle from './styles';
+import { messageStyle } from './styles';
 let socket;
 
 function Chatbox({ chat, profile }) {
-  const style = chatboxStyle();
-  const url = `${MESSAGES_API_URL}/chat/${chat}`
-  const profileID = useSelector(state => state.currentUser.profile);
+  const style = messageStyle();
+  const url = `${MESSAGES_API_URL}/chat/${chat}`;
+  const profileID = useSelector(state => state.currentUser).profile;
 
   const isRendered = useRef(false);
-  const messagesEndRef = useRef('el')
+  const messagesEndRef = useRef('el');
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
   const [profiles, setProfiles] = useState(null);
 
   const scrollToBottom = () => {
-    if (messages.length > 0) {
+    if (messages.length > 0)
       messagesEndRef.current.scrollIntoView()
-    }
   }
 
   useEffect(() => {
@@ -37,11 +36,10 @@ function Chatbox({ chat, profile }) {
     isRendered.current = true;
     axios.get(url)
       .then((res) => {
-        if (isRendered.current) {
+        if (isRendered.current)
           setProfiles(res.data.profiles);
-          setMessages(res.data.messages);
-          socket.emit('join', { profile: profile._id, chat }, () => null);
-        }
+        setMessages(res.data.messages);
+        socket.emit('join', { profile: profile._id, chat }, () => null);
       })
       .catch((err) => console.log(err));
 

@@ -10,7 +10,7 @@ import NewsfeedPost from '../components/NewsfeedPost';
 import { BACKEND_URL } from '../utils/constants';
 
 function Home({ history }) {
-  const profileID = useSelector(state => state.currentUser.profile);
+  const profileID = useSelector(state => state.currentUser).profile;
   const isLoggedIn = useSelector(state => state.isLoggedIn);
 
   if (!isLoggedIn) history.push('/login');

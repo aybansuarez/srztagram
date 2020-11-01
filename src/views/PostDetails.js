@@ -20,7 +20,7 @@ import { BACKEND_URL } from '../utils/constants';
 function PostDetails() {
   const { id } = useParams();
   const { username } = useParams();
-  const profileID = useSelector(state => state.currentUser.profile);
+  const profileID = useSelector(state => state.currentUser).profile;
   const isLogged = useSelector(state => state.isLoggedIn);
 
   const genericState = { loading: false, data: null, error: false };

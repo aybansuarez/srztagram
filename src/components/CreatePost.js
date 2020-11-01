@@ -7,8 +7,8 @@ import { BACKEND_URL } from '../utils/constants';
 
 function CreatePost() {
   const history = useHistory();
-  const profile = useSelector(state => state.currentUser.profile);
-  const username = useSelector(state => state.currentUser.username);
+  const profile = useSelector(state => state.currentUser).profile;
+  const username = useSelector(state => state.currentUser).username;
   const inputFile = useRef(null);
   const [image, setImage] = useState('');
   const [caption, setCaption] = useState('');
