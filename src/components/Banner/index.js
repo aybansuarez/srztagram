@@ -8,8 +8,8 @@ import Typography from '@material-ui/core/Typography';
 
 import defaultLogo from '../../assets/default_avatar.png';
 import { bannerStyle } from './styles';
-import FollowButton from '../FollowButton'
-import UnfollowButton from '../UnfollowButton'
+import Follow from '../Button/Follow';
+import Unfollow from '../Button/Unfollow';
 import { findProfile } from '../../utils/helper';
 
 function Banner({ profile }) {
@@ -26,9 +26,9 @@ function Banner({ profile }) {
           {
             profile._id === profileID ? null :
               findProfile(profile.followers, profileID) ?
-                <UnfollowButton reload user={profile} profile={profileID} />
+                <Unfollow reload user={profile} profile={profileID} />
                 :
-                <FollowButton reload user={profile} profile={profileID} />
+                <Follow reload user={profile} profile={profileID} />
           }
         </Grid>
       </Grid>

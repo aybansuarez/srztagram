@@ -4,8 +4,8 @@ import { Container, Card, Image, Row } from 'react-bootstrap';
 import defaultLogo from '../assets/default_avatar.png'
 import { useSelector } from 'react-redux';
 
-import LikeButton from './LikeButton';
-import UnlikeButton from './UnlikeButton';
+import Like from './Button/Like';
+import Unlike from './Button/Unlike';
 import Likes from './Likes';
 
 function NewsfeedPost(props) {
@@ -76,14 +76,14 @@ function NewsfeedPost(props) {
           <div className='ml-2' style={{ fontSize: '14px' }}>
             <div className='my-1 d-flex align-items-center'>
               {findLiker(props.post.likes, currentProfile) ?
-                <UnlikeButton
+                <Unlike
                   like={onLikeClick}
                   unlike={onUnlikeClick}
                   post={props.post}
                   profile={currentProfile}
                 />
                 :
-                <LikeButton
+                <Like
                   like={onLikeClick}
                   unlike={onUnlikeClick}
                   post={props.post}

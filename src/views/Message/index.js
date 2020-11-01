@@ -18,7 +18,7 @@ function Message() {
   const [chatID, setChatID] = useState(id);
   const [currentProfile, setCurrentProfile] = useState(null);
   const profileID = useSelector(state => state.currentUser.profile);
-  const isLogged = useSelector(state => state.isLoggedIn);
+  const isLoggedIn = useSelector(state => state.isLoggedIn);
   const location = useLocation();
   const isRendered = useRef(false);
 
@@ -54,7 +54,7 @@ function Message() {
 
   let content = null;
 
-  if (chats && isLogged) {
+  if (chats && isLoggedIn) {
     content =
       <>
         <Grid container className={style.root}>

@@ -9,24 +9,23 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Avatar from '@material-ui/core/Avatar';
 
 import { findProfile } from '../../utils/helper';
-import FollowButton from '../FollowButton'
-import UnfollowButton from '../UnfollowButton'
+import Follow from '../Button/Follow';
+import Unfollow from '../Button/Unfollow';
 import profileItemStyle from './styles';
 
-function ProfileItem({ profile }) {
+function ProfileItem({ profile, type }) {
   let button;
   const style = profileItemStyle();
   const profileID = useSelector(state => state.currentUser).profile;
 
   const isFollower = findProfile(profile.followers, profileID);
-  const isFollowing = findProfile(profile.following, profileID);
 
   if (profile._id === profileID)
     button = null;
-  else if (isFollower || isFollowing)
-    button = <UnfollowButton user={profile} profile={profileID} />
+  else if (isFollower)
+    button = <Unfollow user={profile} profile={profileID} />
   else
-    button = <FollowButton user={profile} profile={profileID} />
+    button = <Follow user={profile} profile={profileID} />
 
   return (
     <ListItem

@@ -9,8 +9,8 @@ import {
 } from 'react-bootstrap';
 
 import Main from './Main';
-import LikeButton from '../components/LikeButton';
-import UnlikeButton from '../components/UnlikeButton';
+import Like from '../components/Button/Like';
+import Unlike from '../components/Button/Unlike';
 import Likes from '../components/Likes';
 import Spinner from '../components/Spinner';
 import Comment from '../components/Comment';
@@ -125,14 +125,14 @@ function PostDetails() {
               <div className='my-1 d-flex'>
                 <div className='col-6 p-0  align-items-center'>
                   {findLiker(postDetails.data.likes, profileID) ?
-                      <UnlikeButton
+                      <Unlike
                         like={onLikeClick}
                         unlike={onUnlikeClick}
                         post={postDetails.data}
                         profile={profileID}
                       />
                       :
-                      <LikeButton
+                      <Like
                         like={onLikeClick}
                         unlike={onUnlikeClick}
                         post={postDetails.data}
