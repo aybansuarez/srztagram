@@ -6,7 +6,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import CardMedia from '@material-ui/core/CardMedia';
-import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 
@@ -26,11 +25,14 @@ function Post({ post }) {
   const onLikeClick = () => setLikesCount(likesCount + 1);
   const onUnlikeClick = () => setLikesCount(likesCount - 1);
 
+  const postDate = new Date(post.createdAt.slice(0, 10)).toLocaleDateString();
+
   const findLiker = (arr, profile) => {
     return arr.find((liker) => {
       return liker._id === profile;
     })
   }
+
   return (
     <Paper square className={style.root}>
       <Grid container className={style.container}>
@@ -42,7 +44,9 @@ function Post({ post }) {
           <Typography>{post.profile.username}</Typography>
         </Link>
       </Grid>
-      <CardMedia component='img' image={post.image} />
+      <Link to={`/${post.profile.username}/p/${post._id}`}>
+        <CardMedia component='img' image={post.image} />
+      </Link>
       <Grid container className={style.container}>
         <Likes likes={post.likes} show={show} hide={handleClose} />
         <Grid item xs={6} className={style.likes}>
@@ -70,7 +74,7 @@ function Post({ post }) {
         <Grid item xs={6} className={style.date}>
           <Typography className={style.span}>
             <Link to={`/${post.profile.username}/p/${post._id}`}>
-              {post.createdAt}
+              {postDate}
             </Link>
           </Typography>
         </Grid>
@@ -79,9 +83,6 @@ function Post({ post }) {
             <Link to={`/${post.profile.username}`}>
               {post.profile.username}
             </Link>
-          </span>
-          <span className={style.authorIcon}>
-            <PhotoCameraIcon />
           </span>
           <span>
             {post.caption}

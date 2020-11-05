@@ -4,7 +4,7 @@ export const buttonStyle = makeStyles((theme) => ({
   like: {
     fontSize: '20px',
     cursor: 'pointer',
-    color: '#15202b'
+    color: '#fff'
   },
   unlike: {
     fontSize: '20px',

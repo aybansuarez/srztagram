@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -9,10 +10,22 @@ import ChatRoundedIcon from '@material-ui/icons/ChatRounded';
 
 import logo from '../../assets/srztagram-logo.png';
 import textLogo from '../../assets/srztagram-text.png';
+import socket from '../../utils/socket';
+import desktopNotif from '../../utils/notification';
 import headerStyle from './styles';
 
 function Header() {
   const style = headerStyle();
+  const isLoggedIn = useSelector(state => state.isLoggedIn);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      socket.on('notification', ({ liker, post }) => {
+        const message = `${liker} liked your post`;
+        desktopNotif(message, 'SRZtagram')
+      });
+    }
+  }, [isLoggedIn]);
 
   return (
     <AppBar position='sticky' className={style.root} elevation={0}>

@@ -50,16 +50,9 @@ export const postStyle = makeStyles((theme) => ({
   },
   username: {
     fontWeight: 'bold',
+    marginRight: theme.spacing(1),
     '& a': {
       color: '#fff'
     }
   },
-  authorIcon: {
-    margin: theme.spacing(0.5),
-    color: '#666',
-    '& svg': {
-      fontSize: '16px'
-    }
-  },
-
 }));

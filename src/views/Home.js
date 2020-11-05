@@ -6,7 +6,7 @@ import { CgSmileNone } from 'react-icons/cg';
 
 import Main from './Main';
 import Spinner from '../components/Spinner';
-import NewsfeedPost from '../components/NewsfeedPost';
+import Post from '../components/Post';
 import { BACKEND_URL } from '../utils/constants';
 
 function Home({ history }) {
@@ -40,7 +40,10 @@ function Home({ history }) {
   if (feed.data) {
     if (feed.data.length) {
       subcontent = feed.data.map((feed, key) =>
-        <NewsfeedPost key={key} post={feed} />)
+        <div key={key} style={{ margin: '10px 0' }}>
+          <Post post={feed} />
+        </div>
+      )
     } else {
       subcontent =
         <Container className='text-center mt-5'>

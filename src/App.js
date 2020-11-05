@@ -16,6 +16,7 @@ import UserSearch from './views/UserSearch';
 import Header from './components/Header';
 import { authenticate } from './utils/authentication';
 import { login } from './actions';
+import socket from './utils/socket';
 
 function App() {
   const dispatch = useDispatch();
@@ -24,9 +25,23 @@ function App() {
   useEffect(() => {
     const auth = async () => {
       const isAuth = await authenticate();
-      if (isAuth) dispatch(login())
+      if (isAuth) {
+        dispatch(login());
+        socket.emit(
+          'login',
+          {
+            profile: isAuth.data.id,
+            chat: isAuth.data.id
+          }, () => null
+        );
+      }
     }
     auth();
+
+    return () => {
+      socket.emit('disconnect');
+      socket.off();
+    }
   }, [dispatch]);
 
   const excludeHeader = [

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import io from 'socket.io-client';
 import axios from 'axios';
 
 import Grid from '@material-ui/core/Grid';
@@ -10,10 +9,10 @@ import SendRoundedIcon from '@material-ui/icons/SendRounded';
 import InputBase from '@material-ui/core/InputBase';
 import Paper from '@material-ui/core/Paper';
 
-import { BACKEND_URL, MESSAGES_API_URL } from '../../utils/constants'
+import { MESSAGES_API_URL } from '../../utils/constants'
 import defaultLogo from '../../assets/default_avatar.png';
+import socket from '../../utils/socket';
 import { messageStyle } from './styles';
-let socket;
 
 function Chatbox({ chat, profile }) {
   const style = messageStyle();
@@ -32,14 +31,13 @@ function Chatbox({ chat, profile }) {
   }
 
   useEffect(() => {
-    socket = io(BACKEND_URL);
     isRendered.current = true;
     axios.get(url)
       .then((res) => {
         if (isRendered.current)
           setProfiles(res.data.profiles);
         setMessages(res.data.messages);
-        socket.emit('join', { profile: profile._id, chat }, () => null);
+        socket.emit('joinChat', { profile: profile._id, chat }, () => null);
       })
       .catch((err) => console.log(err));
 
